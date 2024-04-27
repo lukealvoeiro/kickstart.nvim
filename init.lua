@@ -123,6 +123,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- Insert newline without entering insert mode
 vim.keymap.set('n', '<S-CR>', '@="m`o<C-V><Esc>``"<CR>', { desc = '[Enter] a new line below' }) -- <CR> is "Enter"
 
+-- Open parent directory on "-" press
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -175,7 +178,11 @@ require('lazy').setup({
   -- oil is a file explorer that lets you edit your filesystem like a normal Neovim buffer
   {
     'stevearc/oil.nvim',
-    opts = {},
+    opts = {
+      view_options = {
+        show_hidden = true,
+      },
+    },
   },
 
   -- simple games to practice Vim motions
