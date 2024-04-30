@@ -1,6 +1,6 @@
 -- SETTINGS FOR NEOVIDE
 vim.o.guifont = 'Pragmasevka Nerd Font:h16'
-vim.g.neovide_fullscreen = true
+vim.g.neovide_remember_window_size = true
 if vim.g.neovide then
   vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
   vim.keymap.set('v', '<D-c>', '"+y') -- Copy
@@ -9,13 +9,13 @@ if vim.g.neovide then
   vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
   vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
 end
+-- END OF NEOVIDE CONFIG
 
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
--- END OF NEOVIDE CONFIG
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -97,9 +97,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Buffer navigation
-vim.keymap.set('n', '<leader>gb', ':ls<CR>:b<Space>', { desc = 'Go to [B]uffer' })
-
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -107,6 +104,10 @@ vim.keymap.set('n', '<leader>gb', ':ls<CR>:b<Space>', { desc = 'Go to [B]uffer' 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Remap backspace to be ^. This is useful for switching between files and going to the first char on the line
+vim.keymap.set('n', '<BS>', '^')
+vim.keymap.set('n', '<C-BS>', '<C>^')
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
