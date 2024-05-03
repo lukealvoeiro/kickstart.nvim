@@ -10,8 +10,6 @@ return {
     config = function(_, opts)
       require('lsp_signature').setup(opts)
     end,
-    vim.keymap.set({ 'n' }, '<leader>Dk', function()
-      require('lsp_signature').toggle_float_win()
-    end, { silent = true, noremap = true, desc = 'toggle signature' }),
   },
+  { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
 }

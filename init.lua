@@ -23,6 +23,9 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Ctrl+z to suspend nvim. Remap Ctrl+z in the terminal to fg
+vim.keymap.set('n', '<C-z', ':suspend')
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -107,7 +110,6 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 
 -- Remap backspace to be ^. This is useful for switching between files and going to the first char on the line
 vim.keymap.set('n', '<BS>', '^')
-vim.keymap.set('n', '<C-BS>', '<C>^')
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -518,7 +520,18 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {
+          -- Below was added so that pyright works with poetry envs
+          before_init = function(_, config)
+            local Path = require 'plenary.path'
+            local venv = Path:new((config.root_dir:gsub('/', Path.path.sep)), '.venv')
+            if venv:joinpath('bin'):is_dir() then
+              config.settings.python.pythonPath = tostring(venv:joinpath('bin', 'python'))
+            else
+              config.settings.python.pythonPath = tostring(venv:joinpath('Scripts', 'python.exe'))
+            end
+          end,
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -723,7 +736,6 @@ require('lazy').setup({
       }
     end,
   },
-
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
