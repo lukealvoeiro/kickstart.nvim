@@ -22,10 +22,16 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
+vim.opt.termguicolors = true
+
+-- NOTE: luke's remaps below:
 
 -- Ctrl+z to suspend nvim. Remap Ctrl+z in the terminal to fg
-vim.keymap.set('n', '<C-z', ':suspend')
-
+vim.keymap.set('n', '<C-z', ':suspend', { desc = 'Suspend nvim' })
+vim.opt.fillchars:append { diff = '╱' } -- makes diffs look better
+vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Paste without yanking' })
+vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = 'Delete without yanking' })
+vim.keymap.set('n', '<leader>td', ':Neotree git_status float<CR>', { desc = '[O]pen Git [D]iff' })
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -109,7 +115,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Remap backspace to be ^. This is useful for switching between files and going to the first char on the line
-vim.keymap.set('n', '<BS>', '^')
+vim.keymap.set('n', '<BS>', '^', { desc = 'Go to first char on line' })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -180,16 +186,6 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
-
-  -- oil is a file explorer that lets you edit your filesystem like a normal Neovim buffer
-  {
-    'stevearc/oil.nvim',
-    opts = {
-      view_options = {
-        show_hidden = true,
-      },
-    },
-  },
 
   -- simple games to practice Vim motions
   { 'ThePrimeagen/vim-be-good' },
@@ -617,7 +613,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { 'isort', 'black' },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
@@ -761,44 +757,6 @@ require('lazy').setup({
     opts = { signs = false },
   },
 
-  {
-    'folke/trouble.nvim',
-    branch = 'dev', -- IMPORTANT!
-    keys = {
-      {
-        '<leader>xx',
-        '<cmd>Trouble diagnostics toggle<cr>',
-        desc = 'Diagnostics (Trouble)',
-      },
-      {
-        '<leader>xX',
-        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
-        desc = 'Buffer Diagnostics (Trouble)',
-      },
-      {
-        '<leader>cs',
-        '<cmd>Trouble symbols toggle focus=false<cr>',
-        desc = 'Symbols (Trouble)',
-      },
-      {
-        '<leader>cl',
-        '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
-        desc = 'LSP Definitions / references / ... (Trouble)',
-      },
-      {
-        '<leader>xL',
-        '<cmd>Trouble loclist toggle<cr>',
-        desc = 'Location List (Trouble)',
-      },
-      {
-        '<leader>xQ',
-        '<cmd>Trouble qflist toggle<cr>',
-        desc = 'Quickfix List (Trouble)',
-      },
-    },
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
-  },
-
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -884,8 +842,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
