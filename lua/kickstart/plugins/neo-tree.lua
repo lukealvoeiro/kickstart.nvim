@@ -39,10 +39,12 @@ return {
     { '\\', ':Neotree reveal<CR>', { desc = 'NeoTree reveal' } },
   },
   opts = {
+    close_if_last_window = true,
     window = {
       mappings = {
         ['\\'] = 'close_window',
         ['D'] = 'show_diff',
+        ['s'] = false,
       },
     },
     filesystem = {
