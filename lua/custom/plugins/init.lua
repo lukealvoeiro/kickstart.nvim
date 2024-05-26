@@ -3,15 +3,6 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  {
-    'ray-x/lsp_signature.nvim',
-    event = 'VeryLazy',
-    opts = {},
-    config = function(_, opts)
-      require('lsp_signature').setup(opts)
-    end,
-  },
-
   -- oil is a file explorer that lets you edit your filesystem like a normal Neovim buffer
   {
     'stevearc/oil.nvim',
@@ -44,7 +35,7 @@ return {
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
-      { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+      { '<leader>gg', '<cmd>LazyGit<cr>', desc = 'Lazy[G]it' },
     },
   },
 }

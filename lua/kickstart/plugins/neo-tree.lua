@@ -18,7 +18,7 @@ local show_diff = function(state)
     -- do nothing for dirs
   end)
 
-  vim.cmd [[Gdiffsplit]]
+  vim.cmd [[Gvdiffsplit]]
 end
 
 local add_global = function(t)
