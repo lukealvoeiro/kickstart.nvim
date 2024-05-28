@@ -2,8 +2,8 @@ require 'config.options'
 require 'config.keymaps'
 
 -- TODOs:
--- - open on github
 -- - toggle formatting on and off
+-- - open on github
 -- - add better hotkeys for completions
 -- - yank path
 -- - move hunk actions to leader+gh
@@ -359,7 +359,6 @@ require('lazy').setup({
               end,
             })
           end
-
           -- The following autocommand is used to enable inlay hints in your
           -- code, if the language server you are using supports them
           --
@@ -535,6 +534,7 @@ require('lazy').setup({
     },
     config = function()
       -- See `:help cmp`
+      vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
@@ -603,6 +603,11 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+        },
+        experimental = {
+          ghost_text = {
+            hl_group = 'CmpGhostText',
+          },
         },
       }
     end,
