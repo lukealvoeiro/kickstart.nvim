@@ -2,7 +2,6 @@ require 'config.options'
 require 'config.keymaps'
 
 -- TODOs:
--- - toggle formatting on and off
 -- - open on github
 -- - add better hotkeys for completions
 -- - yank path
