@@ -39,6 +39,7 @@ return {
     { '\\', ':Neotree reveal<CR>', { desc = 'NeoTree reveal' } },
   },
   opts = {
+    open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
     close_if_last_window = true,
     window = {
       mappings = {
@@ -48,6 +49,7 @@ return {
       },
     },
     filesystem = {
+      use_libuv_file_watcher = true,
       commands = add_global {},
     },
     buffers = {
@@ -55,6 +57,20 @@ return {
     },
     git_status = {
       commands = add_global {},
+    },
+    default_component_configs = {
+      indent = {
+        with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+        expander_collapsed = '',
+        expander_expanded = '',
+        expander_highlight = 'NeoTreeExpander',
+      },
+      git_status = {
+        symbols = {
+          unstaged = '󰄱',
+          staged = '󰱒',
+        },
+      },
     },
   },
 }

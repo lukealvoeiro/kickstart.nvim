@@ -7,12 +7,12 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = 'Delete without yank
 
 -- SETTINGS FOR NEOVIDE
 if vim.g.neovide then
-  vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
-  vim.keymap.set('v', '<D-c>', '"+y') -- Copy
-  vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
-  vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
-  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
-  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
+  vim.keymap.set('n', '<D-s>', ':w<CR>', { desc = 'Save file' }) -- Save
+  vim.keymap.set('v', '<D-c>', '"+y', { desc = 'Copy to clipboard' }) -- Copy
+  vim.keymap.set('n', '<D-v>', '"+P', { desc = 'Paste' }) -- Paste normal mode
+  vim.keymap.set('v', '<D-v>', '"+P', { desc = 'Paste' }) -- Paste visual mode
+  vim.keymap.set('c', '<D-v>', '<C-R>+', { desc = 'Paste' }) -- Paste command mode
+  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli', { desc = 'Paste' }) -- Paste insert mode
 end
 -- END OF NEOVIDE CONFIG
 
@@ -39,6 +39,20 @@ vim.keymap.set('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move Down' })
 vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move Up' })
 vim.keymap.set('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move Down' })
 vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move Up' })
+
+-- Join line while keeping the cursor in the same position
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join line' })
+
+-- Keep cursor centred while scrolling up and down
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll up' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll down' })
+
+-- Copy to system clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'Yank selection to system clipboard', silent = true })
+vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank line to system clipboard', silent = true })
+
+-- Oil
+vim.keymap.set('n', '-', "<cmd>lua require('oil').open_float()<CR>", { desc = 'Oil' })
 
 -- buffers
 vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
@@ -87,6 +101,3 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Insert newline without entering insert mode
 vim.keymap.set('n', '<S-CR>', '@="m`o<C-V><Esc>``"<CR>', { desc = '[Enter] a new line below' }) -- <CR> is "Enter"
-
--- Open parent directory on "-" press
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
