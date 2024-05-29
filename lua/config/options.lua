@@ -8,6 +8,7 @@ vim.g.neovide_remember_window_size = true
 vim.opt.fillchars:append { diff = '╱' } -- makes diffs look better
 
 vim.opt.termguicolors = true
+vim.opt.pumblend = 0
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
