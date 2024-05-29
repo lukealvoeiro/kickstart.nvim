@@ -1,6 +1,5 @@
 require 'config.options'
 require 'config.keymaps'
-require 'config.autocmds'
 
 -- TODOs:
 -- - open on github
