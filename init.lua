@@ -1,12 +1,10 @@
 require 'config.options'
 require 'config.keymaps'
+require 'config.autocmds'
 
 -- TODOs:
 -- - open on github
--- - add better hotkeys for completions
 -- - yank path
--- - move hunk actions to leader+gh
--- - copy diagnositic to system keyboard
 -- - note taking
 -- - markdown preview
 --
@@ -108,7 +106,7 @@ require('lazy').setup({
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        ['<leader>gh'] = { name = '[G]it [H]unk', _ = 'which_key_ignore' },
+        ['<leader>gh'] = { name = '[H]unk Actions', _ = 'which_key_ignore' },
         ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
       }
@@ -322,6 +320,9 @@ require('lazy').setup({
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
+          map('gK', vim.lsp.buf.signature_help, 'Signature Help')
+          vim.keymap.set('i', '<c-k>', vim.lsp.buf.signature_help, { desc = 'Signature Help' })
+
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -440,6 +441,7 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'prettier',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -491,6 +493,22 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
+        ['javascript'] = { 'prettier' },
+        ['javascriptreact'] = { 'prettier' },
+        ['typescript'] = { 'prettier' },
+        ['typescriptreact'] = { 'prettier' },
+        ['vue'] = { 'prettier' },
+        ['css'] = { 'prettier' },
+        ['scss'] = { 'prettier' },
+        ['less'] = { 'prettier' },
+        ['html'] = { 'prettier' },
+        ['json'] = { 'prettier' },
+        ['jsonc'] = { 'prettier' },
+        ['yaml'] = { 'prettier' },
+        ['markdown'] = { 'prettier' },
+        ['markdown.mdx'] = { 'prettier' },
+        ['graphql'] = { 'prettier' },
+        ['handlebars'] = { 'prettier' },
       },
     },
   },
@@ -626,6 +644,20 @@ require('lazy').setup({
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
+    opts = {
+      hide_inactive_statusline = true,
+      transparent = true,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+      -- on_highlights = function(highlights, colors)
+      --   highlights.DiagnosticVirtualTextError = { bg = colors.none, fg = '#db4b4b' }
+      --   highlights.DiagnosticVirtualTextWarn = { bg = colors.none, fg = '#e0af68' }
+      --   highlights.DiagnosticVirtualTextHint = { bg = colors.none, fg = '#1abc9c' }
+      --   highlights.DiagnosticVirtualTextInfo = { bg = colors.none, fg = '#0db9d7' }
+      -- end,
+    },
   },
 
   -- Highlight todo, notes, etc in comments

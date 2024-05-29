@@ -47,6 +47,9 @@ vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join line' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll up' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll down' })
 
+-- Delete previous word in insert mode
+vim.keymap.set('i', '<A-BS>', '<Esc>cvb', { desc = 'Delete previous word in insert mode' })
+
 -- Copy to system clipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'Yank selection to system clipboard', silent = true })
 vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank line to system clipboard', silent = true })
@@ -80,7 +83,7 @@ vim.keymap.set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Se
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Toggle format on save
 vim.keymap.set('n', '<leader>tf', '<cmd>FormatToggle<CR>', { desc = 'Toggle format on save' })

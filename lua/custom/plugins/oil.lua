@@ -12,6 +12,11 @@ return {
         ['<C-l>'] = false,
         ['q'] = 'actions.close',
       },
+      git = {
+        add = false,
+        mv = true,
+        rm = true,
+      },
       float = {
         -- Padding around the floating window
         padding = 5,
