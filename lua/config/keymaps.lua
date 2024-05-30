@@ -44,8 +44,8 @@ vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move Up' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join line' })
 
 -- Keep cursor centred while scrolling up and down
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll up' })
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll down' })
+-- vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll up' })
+-- vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll down' })
 
 -- Delete previous word in insert mode
 vim.keymap.set('i', '<A-BS>', '<Esc>cvb', { desc = 'Delete previous word in insert mode' })

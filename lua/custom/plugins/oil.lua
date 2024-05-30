@@ -10,12 +10,7 @@ return {
         ['<C-h>'] = false,
         ['<C-t>'] = false,
         ['<C-l>'] = false,
-        ['q'] = 'actions.close',
-      },
-      git = {
-        add = false,
-        mv = true,
-        rm = true,
+        ['<Esc>'] = 'actions.close',
       },
       float = {
         -- Padding around the floating window
