@@ -1,3 +1,5 @@
+require 'config.undo'
+
 -- Ctrl+z to suspend nvim. Remap Ctrl+z in the terminal to fg
 vim.keymap.set('n', '<C-z', ':suspend', { desc = 'Suspend nvim' })
 
