@@ -7,12 +7,10 @@ require 'config.autocmds'
 -- - yank path
 -- - note taking
 -- - markdown preview
--- - undo points using autocmd
 -- - make shortcuts inside git signs be the same as lazygit, removing extraneous ones
 --      - what we want is an autocmd that will trigger on buff leave. if the exiting buffer is gitsigns we want to close that.
 --      "neo_tree_buffer_enter"
 --
--- refer to https://github.com/metaory/nvim/blob/master/lua/config/keymaps.lua for some of these
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
