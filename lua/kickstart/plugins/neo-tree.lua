@@ -36,7 +36,8 @@ return {
   },
   cmd = 'Neotree',
   keys = {
-    { '\\', ':Neotree reveal<CR>', { desc = 'NeoTree reveal' } },
+    { '\\', ':Neotree toggle git_status left<CR>', { desc = 'NeoTree git status reveal' } },
+    { '|', ':Neotree toggle reveal filesystem<CR>', { desc = 'NeoTree reveal' } },
     { '-', "<C-w><C-l><cmd>lua require('oil').open_float()<CR>", { desc = 'Open oil' } },
   },
   opts = {
