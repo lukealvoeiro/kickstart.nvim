@@ -22,7 +22,17 @@ return {
       require('mini.cursorword').setup()
 
       -- Inline diffs
-      -- require('mini.diff').setup {}
+      require('mini.diff').setup {
+        view = {
+          style = 'sign',
+          signs = {
+            add = '',
+            change = '',
+            delete = '',
+          },
+          priority = 1000,
+        },
+      }
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin

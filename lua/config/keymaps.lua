@@ -59,6 +59,8 @@ vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank line to system clipboar
 -- Oil
 vim.keymap.set('n', '-', "<cmd>lua require('oil').open_float()<CR>", { desc = 'Oil' })
 
+-- Diffs
+vim.keymap.set('n', '+', ':lua MiniDiff.toggle_overlay()<CR>', { desc = 'Diff' })
 -- buffers
 vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
 vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next Buffer' })

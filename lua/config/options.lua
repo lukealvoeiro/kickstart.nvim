@@ -4,6 +4,8 @@ vim.g.maplocalleader = ' '
 -- For Neovide
 vim.o.guifont = 'Pragmasevka Nerd Font:h16'
 vim.g.neovide_remember_window_size = true
+vim.g.neovide_transparency = 0.15
+vim.g.neovide_window_blurred = true
 
 vim.opt.fillchars:append { diff = '╱' } -- makes diffs look better
 
@@ -84,27 +86,3 @@ vim.opt.scrolloff = 10
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.opt.wildmode = 'longest:full,full'
-
-function SetRandomLineNrColor()
-  math.randomseed(os.time())
-
-  local colors = {
-    '#b4befe', -- Lavender
-    '#eba0ac', -- Maroon
-    '#d2fac5', -- Green
-    '#f2cdcd', -- Flamingo
-    '#cba6f7', -- Mauve
-    '#fcc6a7', -- Peach
-    '#89b4fa', -- Blue
-    '#89dceb', -- Sky
-  }
-
-  local index = math.random(#colors)
-  vim.api.nvim_set_hl(0, 'LineNr', { fg = colors[index], bold = true })
-end
-
--- Ensure the random color is selected each time Neovim starts
-vim.cmd 'autocmd VimEnter * lua SetRandomLineNrColor()'
--- Setting highlights for lines above and below
-vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#6e738d', bold = false })
-vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#6e738d', bold = false })
