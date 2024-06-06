@@ -346,9 +346,9 @@ require('lazy').setup({
             { '│', 'BorderBG' },
           }
           --
-          vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderTable })
+          -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderTable })
 
-          vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderTable })
+          -- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderTable })
 
           -- This may be unwanted, since they displace some of your code
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
@@ -389,6 +389,11 @@ require('lazy').setup({
               config.settings.python.pythonPath = tostring(venv:joinpath('Scripts', 'python.exe'))
             end
           end,
+          settings = {
+            pyright = {
+              disableOrganizeImports = true, -- Using Ruff
+            },
+          },
         },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -399,6 +404,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        ruff_lsp = {},
 
         lua_ls = {
           -- cmd = {...},
