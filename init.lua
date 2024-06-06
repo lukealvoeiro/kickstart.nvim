@@ -345,10 +345,8 @@ require('lazy').setup({
             { '╰', 'BorderBG' },
             { '│', 'BorderBG' },
           }
-          --
-          -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderTable })
-
-          -- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderTable })
+          vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderTable })
+          vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderTable })
 
           -- This may be unwanted, since they displace some of your code
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
@@ -392,6 +390,7 @@ require('lazy').setup({
           settings = {
             pyright = {
               disableOrganizeImports = true, -- Using Ruff
+              openFilesOnly = false,
             },
           },
         },
