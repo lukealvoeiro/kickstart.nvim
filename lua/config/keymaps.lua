@@ -103,11 +103,13 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Remap backspace to be ^. This is useful for switching between files and going to the first char on the line
 vim.keymap.set('n', '<BS>', '^', { desc = 'Go to first char on line' })
 
--- TIP: Disable arrow keys in normal mode
-vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- Remap arrow keys for tmux integration
+vim.keymap.set('n', '<left>', '<cmd> TmuxNavigateLeft<CR>')
+vim.keymap.set('n', '<right>', '<cmd> TmuxNavigateRight<CR>')
+vim.keymap.set('n', '<down>', '<cmd> TmuxNavigateDown<CR>')
+vim.keymap.set('n', '<up>', '<cmd> TmuxNavigateUp<CR>')
 
 -- Insert newline without entering insert mode
 vim.keymap.set('n', '<S-CR>', '@="m`o<C-V><Esc>``"<CR>', { desc = '[Enter] a new line below' }) -- <CR> is "Enter"
+vim.keymap.set('n', '<M-p>', 'o<Esc>p', { desc = 'Paste on new line below' })
+vim.keymap.set('n', '<M-P>', 'o<Esc>P', { desc = 'Paste on new line above' })

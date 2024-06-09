@@ -43,6 +43,21 @@ return {
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
 
+      -- -- Adds autocompletion to the command prompt
+      -- cmp.setup.cmdline(':', {
+      --   mapping = cmp.mapping.preset.cmdline(),
+      --   sources = cmp.config.sources({
+      --     { name = 'path' },
+      --   }, {
+      --     {
+      --       name = 'cmdline',
+      --       option = {
+      --         ignore_cmds = { 'Man', '!' },
+      --       },
+      --     },
+      --   }),
+      -- })
+
       cmp.setup {
         snippet = {
           expand = function(args)
