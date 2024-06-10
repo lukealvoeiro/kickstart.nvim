@@ -38,7 +38,7 @@ return {
     },
     config = function()
       -- See `:help cmp`
-      vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
+      -- vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
@@ -142,11 +142,11 @@ return {
             winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
           },
         },
-        experimental = {
-          ghost_text = {
-            hl_group = 'CmpGhostText',
-          },
-        },
+        -- experimental = {
+        --   ghost_text = {
+        --     hl_group = 'CmpGhostText',
+        --   },
+        -- },
         ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = function(_, vim_item)

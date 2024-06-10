@@ -33,6 +33,8 @@ return {
           priority = 1000,
         },
       }
+
+      vim.keymap.set('n', '+', ':lua MiniDiff.toggle_overlay()<CR>', { desc = 'Diff' })
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin

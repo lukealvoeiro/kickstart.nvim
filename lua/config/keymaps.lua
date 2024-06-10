@@ -1,4 +1,5 @@
 require 'config.undo'
+require 'config.commands'
 
 -- Ctrl+z to suspend nvim. Remap Ctrl+z in the terminal to fg
 vim.keymap.set('n', '<C-z', ':suspend', { desc = 'Suspend nvim' })
@@ -59,8 +60,6 @@ vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank line to system clipboar
 -- Oil
 vim.keymap.set('n', '-', "<cmd>lua require('oil').open_float()<CR>", { desc = 'Oil' })
 
--- Diffs
-vim.keymap.set('n', '+', ':lua MiniDiff.toggle_overlay()<CR>', { desc = 'Diff' })
 -- buffers
 vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
 vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
@@ -113,3 +112,5 @@ vim.keymap.set('n', '<up>', '<cmd> TmuxNavigateUp<CR>')
 vim.keymap.set('n', '<S-CR>', '@="m`o<C-V><Esc>``"<CR>', { desc = '[Enter] a new line below' }) -- <CR> is "Enter"
 vim.keymap.set('n', '<M-p>', 'o<Esc>p', { desc = 'Paste on new line below' })
 vim.keymap.set('n', '<M-P>', 'o<Esc>P', { desc = 'Paste on new line above' })
+
+vim.api.nvim_set_keymap('n', '<leader>ee', [[:lua YankDiagnosticError()<CR>]], { noremap = true, silent = true, desc = 'Copy error' })
