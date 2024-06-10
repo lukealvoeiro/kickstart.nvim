@@ -12,5 +12,18 @@ return {
     keys = {
       { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Open Neogit' },
     },
+    opts = {
+      signs = {
+        item = {
+          '',
+          '',
+        },
+        section = {
+
+          '',
+          '',
+        },
+      },
+    },
   },
 }
