@@ -61,3 +61,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+vim.api.nvim_create_autocmd('User', {
+  -- desc = 'Close certain windows when opening Telescope',
+  pattern = 'TelescopeFindPre',
+  group = augroup 'pre_open_telescope',
+  callback = function(event)
+    local curr_buffer_name = vim.api.nvim_buf_get_name(0)
+    local win_number = vim.api.nvim_get_current_win()
+    local is_float = vim.api.nvim_win_get_config(win_number).zindex
+    print(curr_buffer_name)
+    if is_float then
+      vim.api.nvim_win_close(win_number, false)
+    end
+  end,
+})
