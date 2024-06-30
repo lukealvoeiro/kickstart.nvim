@@ -11,7 +11,15 @@ vim.opt.fillchars:append { diff = '╱' } -- makes diffs look better
 
 vim.opt.termguicolors = true
 vim.opt.pumblend = 0
-vim.opt.wrap = false -- Disable line wrap
+vim.opt.wrap = true
+vim.opt.breakindent = true
+vim.opt.showbreak = string.rep(' ', 3) -- Make it so that long lines wrap smartly
+vim.opt.linebreak = true
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+vim.opt.guicursor = ''
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true

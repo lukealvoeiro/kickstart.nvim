@@ -39,6 +39,7 @@ return {
     { '\\', ':Neotree toggle git_status left<CR>', { desc = 'NeoTree git status reveal' } },
     { '|', ':Neotree toggle reveal filesystem<CR>', { desc = 'NeoTree reveal' } },
     { '-', "<C-w><C-l><cmd>lua require('oil').open_float()<CR>", { desc = 'Open oil' } },
+    { '_', '<C-w><C-l><cmd>Oil<CR>', { desc = 'Open oil' } },
   },
   opts = {
     open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
