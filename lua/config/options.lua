@@ -19,6 +19,9 @@ vim.opt.linebreak = true
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- For better auto-session performance
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+
 vim.opt.guicursor = ''
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal

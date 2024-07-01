@@ -57,9 +57,6 @@ vim.keymap.set('i', '<A-BS>', '<Esc>cvb', { desc = 'Delete previous word in inse
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'Yank selection to system clipboard', silent = true })
 vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank line to system clipboard', silent = true })
 
--- Oil
-vim.keymap.set('n', '-', "<cmd>lua require('oil').open_float()<CR>", { desc = 'Oil' })
-
 -- buffers
 vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
 vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
