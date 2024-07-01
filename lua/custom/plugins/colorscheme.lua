@@ -68,6 +68,7 @@ return {
         telescope = true,
         treesitter = true,
         which_key = true,
+        treesitter_context = true,
       },
       highlight_overrides = {
         all = function(colors)
@@ -79,6 +80,11 @@ return {
           }
         end,
       },
+      custom_highlights = function(colors)
+        return {
+          TreesitterContextBottom = { sp = colors.overlay1, style = { 'underline' } },
+        }
+      end,
       color_overrides = {
         mocha = {
           -- I don't think these colours are pastel enough by default!
