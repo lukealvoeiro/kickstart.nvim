@@ -3,10 +3,8 @@ require 'config.keymaps'
 require 'config.autocmds'
 
 -- TODOs:
--- - open on github
 -- - yank path
 -- - note taking
--- - markdown preview
 -- - make shortcuts inside git signs be the same as lazygit, removing extraneous ones
 --      - what we want is an autocmd that will trigger on buff leave. if the exiting buffer is gitsigns we want to close that.
 --      "neo_tree_buffer_enter"
