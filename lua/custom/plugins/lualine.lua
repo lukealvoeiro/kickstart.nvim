@@ -41,6 +41,14 @@ return {
             color = utils.get_hlgroup('Operator', nil),
             padding = { left = 0, right = 1 },
           },
+          {
+            'harpoon2',
+            icon = '󰀱 ',
+            indicators = { '1', '2', '3', '4' },
+            active_indicators = { '[1]', '[2]', '[3]', '[4]' },
+            _separator = ' ',
+            no_harpoon = 'Harpoon not loaded',
+          },
         },
         lualine_x = {
           {
@@ -85,7 +93,7 @@ return {
         },
       },
 
-      extensions = { 'lazy', 'toggleterm', 'mason', 'neo-tree', 'trouble' },
+      extensions = { 'lazy', 'mason', 'neo-tree', 'trouble' },
     }
   end,
 }
