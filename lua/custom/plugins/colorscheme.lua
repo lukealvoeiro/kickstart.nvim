@@ -69,7 +69,6 @@ return {
         treesitter = true,
         which_key = true,
         treesitter_context = true,
-        lualine = true,
       },
       highlight_overrides = {
         all = function(colors)

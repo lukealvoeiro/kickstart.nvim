@@ -19,7 +19,7 @@ return {
         disabled_filetypes = { statusline = { 'dashboard', 'alpha' } },
       },
       sections = {
-        lualine_a = { { 'mode', icon = '' } },
+        lualine_a = { { 'mode' } },
         lualine_b = { { 'branch', icon = '' } },
         lualine_c = {
           {
