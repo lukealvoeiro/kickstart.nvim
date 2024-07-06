@@ -1,16 +1,39 @@
 return {
-  'ThePrimeagen/harpoon',
-  branch = 'harpoon2',
-  dependencies = {
-    'nvim-lua/plenary.nvim',
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    opts = {
+      settings = {
+        save_on_toggle = true,
+      },
+    },
+    config = function()
+      local harpoon = require 'harpoon'
+      harpoon:setup()
+
+      vim.keymap.set('n', '<leader>ha', function()
+        harpoon:list():add()
+      end, { desc = 'Mark file with Harpoon' })
+      vim.keymap.set('n', '<leader>hh', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end, { desc = 'Toggle Harpoon menu' })
+      for i = 1, 4 do
+        vim.keymap.set('n', '<leader>h' .. i, function()
+          harpoon:list():select(i)
+        end, { desc = 'Harpoon mark ' .. i })
+      end
+    end,
   },
-  config = true,
-  keys = {
-    { '<leader>ha', "<cmd>lua require('harpoon.mark').add_file()<CR>", desc = 'Mark file with Harpoon' },
-    { '<leader>hh', "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>", desc = 'Toggle Harpoon menu' },
-    { '<leader>h1', "<cmd>lua require('harpoon.ui').nav_file(1)<CR>", desc = 'Harpoon mark 1' },
-    { '<leader>h2', "<cmd>lua require('harpoon.ui').nav_file(2)<CR>", desc = 'Harpoon mark 2' },
-    { '<leader>h3', "<cmd>lua require('harpoon.ui').nav_file(3)<CR>", desc = 'Harpoon mark 3' },
-    { '<leader>h4', "<cmd>lua require('harpoon.ui').nav_file(4)<CR>", desc = 'Harpoon mark 4' },
+  {
+    'letieu/harpoon-lualine',
+    dependencies = {
+      {
+        'ThePrimeagen/harpoon',
+        branch = 'harpoon2',
+      },
+    },
   },
 }
