@@ -9,6 +9,7 @@ return {
       ['Warning'] = utils.get_hlgroup 'DiagnosticError',
       ['InProgress'] = utils.get_hlgroup 'DiagnosticWarn',
     }
+    local diagnostic_symbols = require 'config.constants'
 
     return {
       options = {
@@ -24,12 +25,7 @@ return {
         lualine_c = {
           {
             'diagnostics',
-            symbols = {
-              error = ' ',
-              warn = ' ',
-              info = ' ',
-              hint = '󰝶 ',
-            },
+            symbols = diagnostic_symbols,
           },
           { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
           { 'filename', padding = { left = 1, right = 0 } },
@@ -44,15 +40,6 @@ return {
             end,
             color = utils.get_hlgroup('Operator', nil),
             padding = { left = 0, right = 1 },
-          },
-          {
-            function()
-              return require('nvim-navic').get_location()
-            end,
-            cond = function()
-              return package.loaded['nvim-navic'] and require('nvim-navic').is_available()
-            end,
-            color = utils.get_hlgroup('Comment', nil),
           },
         },
         lualine_x = {
