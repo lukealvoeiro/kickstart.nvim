@@ -35,7 +35,7 @@ vim.opt.rtp:prepend(lazypath)
 local signs = require('config.constants').diagnostic_symbols
 for type, icon in pairs(signs) do
   local hl = 'DiagnosticSign' .. type:gsub('^%l', string.upper)
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
 end
 
 -- NOTE: Here is where you install your plugins.

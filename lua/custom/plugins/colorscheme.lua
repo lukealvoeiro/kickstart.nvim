@@ -81,9 +81,25 @@ return {
         end,
       },
       custom_highlights = function(colors)
+        math.randomseed(os.time())
+
+        local line_colors = {
+          colors.lavender,
+          colors.maroon,
+          colors.flamingo,
+          colors.mauve,
+          colors.peach,
+          colors.blue,
+          colors.sky,
+        }
+
+        local index = math.random(#line_colors)
         return {
           TreesitterContextBottom = { sp = colors.overlay1, style = { 'underline' } },
           TreesitterContextLineNumber = { fg = colors.overlay1 },
+          LineNr = { fg = line_colors[index], bold = true },
+          LineNrAbove = { fg = colors.overlay1, bold = false },
+          LineNrBelow = { fg = colors.overlay1, bold = false },
         }
       end,
       color_overrides = {
