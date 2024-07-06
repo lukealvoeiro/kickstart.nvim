@@ -1,3 +1,13 @@
+local close_in_float = {
+  function()
+    if require('config.utils').is_curr_buffer_float() then
+      require('oil.actions').close.callback()
+    end
+  end,
+  desc = 'Close in float',
+  mode = 'n',
+}
+
 return {
   {
     'stevearc/oil.nvim',
@@ -14,15 +24,8 @@ return {
         ['<C-h>'] = false,
         ['<C-t>'] = false,
         ['<C-l>'] = false,
-        ['q'] = {
-          function()
-            if require('config.utils').is_curr_buffer_float() then
-              require('oil.actions').close.callback()
-            end
-          end,
-          desc = 'Close in float',
-          mode = 'n',
-        },
+        ['q'] = close_in_float,
+        ['<Esc>'] = close_in_float,
       },
       float = {
         -- Padding around the floating window
