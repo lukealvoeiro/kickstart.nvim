@@ -69,6 +69,7 @@ return {
         treesitter = true,
         which_key = true,
         treesitter_context = true,
+        lualine = true,
       },
       highlight_overrides = {
         all = function(colors)
@@ -83,6 +84,7 @@ return {
       custom_highlights = function(colors)
         return {
           TreesitterContextBottom = { sp = colors.overlay1, style = { 'underline' } },
+          TreesitterContextLineNumber = { fg = colors.overlay1 },
         }
       end,
       color_overrides = {
