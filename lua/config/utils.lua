@@ -56,4 +56,16 @@ function M.parse_hex(int_color)
   return string.format('#%x', int_color)
 end
 
+--- Check if the specified buffer is floating
+--- @param winid integer
+function M.is_buffer_float(winid)
+  return vim.api.nvim_win_get_config(winid).zindex
+end
+
+function M.is_curr_buffer_float()
+  if M.is_buffer_float(vim.api.nvim_get_current_win()) then
+    return true
+  end
+end
+
 return M

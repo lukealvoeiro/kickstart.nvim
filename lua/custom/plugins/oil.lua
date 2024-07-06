@@ -1,6 +1,9 @@
 return {
   {
     'stevearc/oil.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
     opts = {
       default_file_explorer = true,
       view_options = {
@@ -11,7 +14,15 @@ return {
         ['<C-h>'] = false,
         ['<C-t>'] = false,
         ['<C-l>'] = false,
-        ['<Esc>'] = 'actions.close',
+        ['q'] = {
+          function()
+            if require('config.utils').is_curr_buffer_float() then
+              require('oil.actions').close.callback()
+            end
+          end,
+          desc = 'Close in float',
+          mode = 'n',
+        },
       },
       float = {
         -- Padding around the floating window
