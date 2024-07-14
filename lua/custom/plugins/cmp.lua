@@ -57,6 +57,8 @@ return {
       --     },
       --   }),
       -- })
+      local ELLIPSIS_CHAR = '…'
+      local MAX_LABEL_WIDTH = 20
 
       cmp.setup {
         snippet = {
@@ -202,6 +204,24 @@ return {
             --   npm = '[NPM]',
             --   neorg = '[NEORG]',
             -- })[entry.source.name]
+            local content = vim_item.abbr
+            local fixed_width = false
+            local win_width = vim.api.nvim_win_get_width(0)
+
+            -- Set the max content width based on either: 'fixed_width'
+            -- or a percentage of the window width, in this case 20%.
+            -- We subtract 10 from 'fixed_width' to leave room for 'kind' fields.
+            local max_content_width = fixed_width and fixed_width - 10 or math.floor(win_width * 0.2)
+
+            -- Truncate the completion entry text if it's longer than the
+            -- max content width. We subtract 3 from the max content width
+            -- to account for the "..." that will be appended to it.
+            if #content > max_content_width then
+              vim_item.abbr = vim.fn.strcharpart(content, 0, max_content_width - 3) .. '...'
+            else
+              vim_item.abbr = content .. (' '):rep(max_content_width - #content)
+            end
+
             return vim_item
           end,
         },

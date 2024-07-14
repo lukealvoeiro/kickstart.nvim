@@ -19,8 +19,9 @@ return {
         globalstatus = true,
         disabled_filetypes = { statusline = { 'dashboard', 'alpha' } },
       },
+
       sections = {
-        lualine_a = { { 'mode' } },
+        lualine_a = { { 'mode', icon = '' } },
         lualine_b = { { 'branch', icon = '' } },
         lualine_c = {
           {
@@ -28,7 +29,7 @@ return {
             symbols = diagnostic_symbols,
           },
           { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
-          { 'filename', padding = { left = 1, right = 0 } },
+          { 'filename', padding = { left = 1, right = 0 }, path = 1 },
           {
             function()
               local buffer_count = require('core.utils').get_buffer_count()
@@ -40,14 +41,6 @@ return {
             end,
             color = utils.get_hlgroup('Operator', nil),
             padding = { left = 0, right = 1 },
-          },
-          {
-            'harpoon2',
-            icon = '󰀱 ',
-            indicators = { '1', '2', '3', '4' },
-            active_indicators = { '[1]', '[2]', '[3]', '[4]' },
-            _separator = ' ',
-            no_harpoon = 'Harpoon not loaded',
           },
         },
         lualine_x = {

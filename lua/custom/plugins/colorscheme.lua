@@ -89,8 +89,6 @@ return {
           colors.flamingo,
           colors.mauve,
           colors.peach,
-          colors.blue,
-          colors.sky,
         }
 
         local index = math.random(#line_colors)

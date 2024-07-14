@@ -5,8 +5,8 @@ require 'config.commands'
 vim.keymap.set('n', '<C-z', ':suspend', { desc = 'Suspend nvim' })
 
 -- Paste and Delete without yanking
-vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Paste without yanking' })
-vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = 'Delete without yanking' })
+vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste without yanking' })
+vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete without yanking' })
 
 -- SETTINGS FOR NEOVIDE
 if vim.g.neovide then
