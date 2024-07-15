@@ -98,9 +98,9 @@ return {
           for i, file in ipairs(files) do
             local str_for_file = (i == 1 and '  ' or ' ') .. file.name .. (i == size and '  ' or ' ')
             if file.current then
-              table.insert(result, { str_for_file, guibg = text_bg_color, guifg = icon_bg_color, gui = 'bold,underline', guisp = mocha.overlay1 })
+              table.insert(result, { str_for_file, guibg = text_bg_color, guifg = icon_bg_color, gui = 'bold' })
             else
-              table.insert(result, { str_for_file, guibg = text_bg_color, guifg = text_fg_color, gui = 'underline', guisp = mocha.overlay1 })
+              table.insert(result, { str_for_file, guibg = text_bg_color, guifg = text_fg_color })
             end
           end
           table.insert(result, { ' 󰛢 ', guibg = icon_bg_color, guifg = helpers.contrast_color(icon_bg_color) })

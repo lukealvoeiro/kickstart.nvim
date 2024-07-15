@@ -21,6 +21,8 @@ return {
       -- Highlight the word under the cursor
       require('mini.cursorword').setup()
 
+      require('mini.icons').setup()
+
       -- Inline diffs
       require('mini.diff').setup {
         view = {
