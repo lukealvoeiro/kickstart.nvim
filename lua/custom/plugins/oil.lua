@@ -11,9 +11,7 @@ local close_in_float = {
 return {
   {
     'stevearc/oil.nvim',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
+    dependencies = {},
     opts = {
       default_file_explorer = true,
       view_options = {
