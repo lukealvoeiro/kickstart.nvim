@@ -227,3 +227,15 @@ sudo pacman -S --noconfirm --needed gcc make git ripgrep fd unzip neovim
 ```
 </details>
 
+## My specific install instructions
+
+```bash
+ln -s ~/.config/nvim/extras/.wezterm.lua ~
+```
+
+### Custom Icons
+
+```bash
+cp ~/.config/nvim/extras/custom_icons/Neovide.icns /Applications/Neovide.app/Contents/Resources/Neovide.icns
+touch /Applications/Neovide.app
+```
