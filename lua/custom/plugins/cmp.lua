@@ -34,31 +34,14 @@ return {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
     },
     config = function()
       -- See `:help cmp`
-      -- vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
+      local comment_hl = require('config.utils').get_hlgroup 'Comment'
+      vim.api.nvim_set_hl(0, 'CmpGhostText', { fg = comment_hl.fg, italic = true })
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
-
-      -- -- Adds autocompletion to the command prompt
-      -- cmp.setup.cmdline(':', {
-      --   mapping = cmp.mapping.preset.cmdline(),
-      --   sources = cmp.config.sources({
-      --     { name = 'path' },
-      --   }, {
-      --     {
-      --       name = 'cmdline',
-      --       option = {
-      --         ignore_cmds = { 'Man', '!' },
-      --       },
-      --     },
-      --   }),
-      -- })
-      local ELLIPSIS_CHAR = '…'
-      local MAX_LABEL_WIDTH = 20
 
       cmp.setup {
         snippet = {
@@ -87,12 +70,6 @@ return {
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
 
-          -- If you prefer more traditional completion keymaps,
-          -- you can uncomment the following lines
-          -- ['<CR>'] = cmp.mapping.confirm { select = true },
-          -- ['<Tab>'] = cmp.mapping.select_next_item(),
-          -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
@@ -106,37 +83,31 @@ return {
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          -- ['<Tab>'] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_next_item()
-          --   elseif luasnip.expand_or_locally_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   -- elseif has_words_before() then
-          --   --   cmp.complete()
-          --   else
-          --     fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-          --   end
-          -- end, { 'i', 's' }),
-          --
-          -- ['<S-Tab>'] = cmp.mapping(function()
-          --   if cmp.visible() then
-          --     cmp.select_prev_item()
-          --   elseif luasnip.locally_jumpable(-1) then
-          --     luasnip.jump(-1)
-          --   end
-          -- end, { 'i', 's' }),
+          ['<C-l>'] = cmp.mapping(function()
+            if luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            end
+          end, { 'i', 's' }),
+          ['<C-h>'] = cmp.mapping(function()
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            end
+          end, { 'i', 's' }),
 
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
-        sources = cmp.config.sources({
-          { name = 'copilot' },
+        sources = {
+          {
+            name = 'lazydev',
+            -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+            group_index = 0,
+          },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
-        }, {
           { name = 'buffer' },
-        }),
+        },
         window = {
           completion = cmp.config.window.bordered {
             winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
@@ -145,65 +116,16 @@ return {
             winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
           },
         },
-        -- experimental = {
-        --   ghost_text = {
-        --     hl_group = 'CmpGhostText',
-        --   },
-        -- },
+        experimental = {
+          ghost_text = {
+            hl_group = 'CmpGhostText',
+          },
+        },
         ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = function(_, vim_item)
-            local kind_icons = {
-              Array = ' ',
-              Boolean = '󰨙 ',
-              Class = ' ',
-              Codeium = '󰘦 ',
-              Color = ' ',
-              Control = ' ',
-              Collapsed = ' ',
-              Constant = '󰏿 ',
-              Constructor = ' ',
-              Copilot = ' ',
-              Enum = ' ',
-              EnumMember = ' ',
-              Event = ' ',
-              Field = ' ',
-              File = ' ',
-              Folder = ' ',
-              Function = '󰊕 ',
-              Interface = ' ',
-              Key = ' ',
-              Keyword = ' ',
-              Method = '󰊕 ',
-              Module = ' ',
-              Namespace = '󰦮 ',
-              Null = ' ',
-              Number = '󰎠 ',
-              Object = ' ',
-              Operator = ' ',
-              Package = ' ',
-              Property = ' ',
-              Reference = ' ',
-              Snippet = ' ',
-              String = ' ',
-              Struct = '󰆼 ',
-              TabNine = '󰏚 ',
-              Text = ' ',
-              TypeParameter = ' ',
-              Unit = ' ',
-              Value = ' ',
-              Variable = '󰀫 ',
-            }
-            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
-            -- vim_item.menu = ({
-            --   buffer = '[BUF]',
-            --   nvim_lsp = '[LSP]',
-            --   nvim_lua = '[API]',
-            --   path = '[PATH]',
-            --   luasnip = '[SNIP]',
-            --   npm = '[NPM]',
-            --   neorg = '[NEORG]',
-            -- })[entry.source.name]
+            local icons = require('config.constants').icons
+            vim_item.kind = string.format('%s %s', icons[vim_item.kind], vim_item.kind)
             local content = vim_item.abbr
             local fixed_width = false
             local win_width = vim.api.nvim_win_get_width(0)
@@ -221,7 +143,6 @@ return {
             else
               vim_item.abbr = content .. (' '):rep(max_content_width - #content)
             end
-
             return vim_item
           end,
         },
