@@ -5,6 +5,12 @@ require 'config.autocmds'
 -- TODOs:
 -- - yank path
 -- - note taking
+-- fzf launch nvim for a directory
+-- remember last dirs you were in
+-- virtual text for dap
+-- figure out dap for python
+-- move harpoon plugin to bottom row of config
+-- make bottom row colors like cyberdream
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`

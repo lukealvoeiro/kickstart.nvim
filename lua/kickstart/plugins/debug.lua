@@ -5,6 +5,19 @@
 -- Primarily focused on configuring the debugger for Go, but can
 -- be extended to other languages as well. That's why it's called
 -- kickstart.nvim and not kitchen-sink.nvim ;)
+local pythonPath = function()
+  local cwd = vim.fn.getcwd()
+  -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+  -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+  -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+  if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+    return cwd .. '/venv/bin/python'
+  elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+    return cwd .. '/.venv/bin/python'
+  else
+    return '/usr/bin/python'
+  end
+end
 
 return {
   -- NOTE: Yes, you can install new plugins here!
@@ -23,6 +36,13 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    {
+      'mfussenegger/nvim-dap-python',
+      config = function()
+        require('dap-python').setup(pythonPath())
+        require('dap-python').test_runner = 'pytest'
+      end,
+    },
   },
   config = function()
     local dap = require 'dap'
@@ -47,30 +67,17 @@ return {
       },
     }
 
-    dap.configurations.python = {
-      {
-        -- The first three options are required by nvim-dap
-        type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
-        request = 'launch',
-        name = 'Launch file',
-        cwd = vim.fn.getcwd(), --python is executed from this directory
-
-        program = '${file}', -- This configuration will launch the current file if used.
-        pythonPath = function()
-          local cwd = vim.fn.getcwd()
-          -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-          -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-          -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-          if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
-            return cwd .. '/venv/bin/python'
-          elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
-            return cwd .. '/.venv/bin/python'
-          else
-            return '/usr/bin/python'
-          end
-        end,
-      },
-    }
+    -- dap.configurations.python = {
+    --   {
+    --     -- The first three options are required by nvim-dap
+    --     type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
+    --     request = 'launch',
+    --     name = 'Launch file',
+    --     cwd = vim.fn.getcwd(), --python is executed from this directory
+    --     pythonPath = pythonPath(),
+    --     program = '${file}', -- This configuration will launch the current file if used.
+    --   },
+    -- }
 
     -- Basic debugging keymaps, feel free to change to your liking!
     vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
@@ -82,7 +89,7 @@ return {
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
 
-    vim.keymap.set('n', 'gh', dapui.eval())
+    vim.keymap.set('n', 'gh', dapui.eval)
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
@@ -92,15 +99,15 @@ return {
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
         icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
+          -- pause = '⏸',
+          -- play = '▶',
+          -- step_into = '⏎',
+          -- step_over = '⏭',
+          -- step_out = '⏮',
+          -- step_back = 'b',
+          -- run_last = '▶▶',
+          -- terminate = '⏹',
+          -- disconnect = '⏏',
         },
       },
     }
