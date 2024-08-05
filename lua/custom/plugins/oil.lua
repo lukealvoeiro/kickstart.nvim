@@ -24,6 +24,25 @@ return {
         ['<C-l>'] = false,
         ['q'] = close_in_float,
         ['<Esc>'] = close_in_float,
+        ['yp'] = {
+          desc = 'Copy filepath to system clipboard',
+          callback = function()
+            require('oil.actions').copy_entry_path.callback()
+            vim.fn.setreg('+', vim.fn.getreg(vim.v.register))
+          end,
+        },
+        ['yrp'] = {
+          desc = 'Copy relative filepath to system clipboard',
+          callback = function()
+            local entry = require('oil').get_cursor_entry()
+            local dir = require('oil').get_current_dir()
+            if not entry or not dir then
+              return
+            end
+            local relpath = vim.fn.fnamemodify(dir, ':.')
+            vim.fn.setreg('+', relpath .. entry.name)
+          end,
+        },
       },
       float = {
         -- Padding around the floating window
