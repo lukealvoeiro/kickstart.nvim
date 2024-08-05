@@ -162,11 +162,13 @@ require('lazy').setup({
           },
           live_grep_args = {
             auto_quoting = true, -- enable/disable auto-quoting
+            additional_args = {},
             mappings = { -- extend mappings
               i = {
                 ['<C-k>'] = lga_actions.quote_prompt(),
                 ['<C-i>'] = lga_actions.quote_prompt { postfix = ' --iglob ' },
                 ['<tab>'] = lga_actions.quote_prompt { postfix = ' -t' },
+                ['<C-f>'] = lga_actions.quote_prompt { postfix = ' --fixed-strings' },
               },
             },
           },
@@ -177,11 +179,16 @@ require('lazy').setup({
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'live_grep_args')
 
-      -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
+      local all_file_search = function()
+        return builtin.find_files { hidden = true, no_ignore = true, prompt_title = 'Find All Files' }
+      end
+
+      -- See `:help telescope.builtin`
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>saf', all_file_search, { desc = '[S]earch [A]ll [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', require('telescope').extensions.live_grep_args.live_grep_args, { desc = '[S]earch by [G]rep' })
