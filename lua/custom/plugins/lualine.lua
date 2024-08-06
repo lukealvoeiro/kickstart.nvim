@@ -138,7 +138,11 @@ return {
             },
           },
           lualine_z = {
-            { require('grapple-line').status, icon = { ' 󰛢 ', align = 'right', color = { bg = icon_bg_color, fg = '#000000', gui = 'bold' } } },
+            {
+              require('grapple-line').status,
+              icon = { ' 󰛢 ', align = 'right', color = { bg = icon_bg_color, fg = '#000000', gui = 'bold' } },
+              padding = { left = 1, right = 0 },
+            },
           },
         },
         extensions = { 'lazy', 'mason', 'neo-tree', 'trouble' },
