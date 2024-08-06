@@ -76,3 +76,27 @@ vim.api.nvim_create_autocmd('User', {
     end
   end,
 })
+
+local function set_terminal_title()
+  local cwd = vim.fn.getcwd()
+  local last_dir = vim.fn.fnamemodify(cwd, ':t')
+  vim.cmd('let &titlestring = "' .. last_dir .. '"')
+end
+
+-- Function to setup autocommands
+local function setup_autocommands()
+  local events = { 'BufEnter', 'BufWritePost', 'WinEnter', 'DirChanged' }
+
+  for _, event in ipairs(events) do
+    vim.api.nvim_create_autocmd(event, {
+      callback = set_terminal_title,
+    })
+  end
+end
+
+-- Ensure the title is set when starting Neovim
+vim.cmd [[let &title = 1]]
+set_terminal_title()
+
+-- Setup the autocommands
+setup_autocommands()
