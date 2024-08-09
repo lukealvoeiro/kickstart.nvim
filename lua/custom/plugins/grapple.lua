@@ -8,7 +8,7 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
     cmd = 'Grapple',
     keys = {
-      { '<leader>ht', '<cmd>Grapple toggle<cr>', desc = 'Tag a file' },
+      { '<leader>ha', '<cmd>Grapple toggle<cr>', desc = 'Tag a file' },
       { '<leader>hh', '<cmd>Grapple toggle_tags<cr>', desc = 'Toggle tags menu' },
 
       { '<leader>h1', '<cmd>Grapple select index=1<cr>', desc = 'Select first tag' },
