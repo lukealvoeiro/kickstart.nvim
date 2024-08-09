@@ -51,6 +51,7 @@ return {
   {
     'nvim-lualine/lualine.nvim',
     event = 'VeryLazy',
+    dependencies = { 'echasnovski/mini.icons' },
     opts = function()
       local utils = require 'config.utils'
       local icon_bg_color = require('config.utils').get_hlgroup('LineNr').fg

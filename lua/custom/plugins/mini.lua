@@ -22,6 +22,7 @@ return {
       require('mini.cursorword').setup()
 
       require('mini.icons').setup()
+      MiniIcons.mock_nvim_web_devicons()
 
       -- Inline diffs
       require('mini.diff').setup {
