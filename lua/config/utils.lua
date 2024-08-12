@@ -68,4 +68,50 @@ function M.is_curr_buffer_float()
   end
 end
 
+--- Check if the file is gitignored
+--- @param file_path string
+--- @return boolean: Returns true if the file is gitignored, false otherwise.
+function M.is_file_git_gitignored(file_path)
+  local handle = io.popen('git check-ignore ' .. file_path)
+  if not handle then
+    return false
+  end
+
+  local result = handle:read '*a'
+  handle:close()
+
+  print('gitignore res', result)
+
+  if result ~= '' then
+    return true
+  else
+    return false
+  end
+end
+
+--- Checks if a given file is outside the current working directory.
+--- @param file_path string: The path of the file to check.
+--- @return boolean: Returns true if the file is outside the current working directory, false otherwise.
+function M.is_file_outside_cwd(file_path)
+  local cwd = vim.fn.getcwd() -- Get the current working directory
+  local abs_file_path = vim.fn.fnamemodify(file_path, ':p') -- Get the absolute path of the file
+
+  -- Check if the file path starts with the cwd
+  if string.sub(abs_file_path, 1, #cwd) ~= cwd then
+    return true
+  else
+    return false
+  end
+end
+
+--- Get the absolute path of the current buffer.
+--- @return string: The absolute path of the current buffer.
+function M.get_current_buffer_path()
+  --- @type string
+  local buf_name = vim.api.nvim_buf_get_name(0)
+  --- @type string
+  local abs_path = vim.fn.fnamemodify(buf_name, ':p')
+  return abs_path
+end
+
 return M

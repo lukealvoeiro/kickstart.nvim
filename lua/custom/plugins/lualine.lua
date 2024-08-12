@@ -1,5 +1,17 @@
 local mocha = require('catppuccin.palettes').get_palette 'mocha'
 
+local function is_second_tier_file()
+  local file_path = require('config.utils').get_current_buffer_path()
+  if require('config.utils').is_file_outside_cwd(file_path) then
+    return true
+  end
+  if require('config.utils').is_file_git_gitignored(file_path) then
+    return true
+  end
+  return false
+end
+-- or if the file is outside of the cwd and not a symlink
+
 local theme = function()
   local colors = {
     darkgray = mocha.crust,
@@ -76,7 +88,14 @@ return {
           lualine_b = { { 'branch', icon = '' } },
           lualine_c = {
             { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
-            { 'filename', padding = { left = 1, right = 0 }, path = 1 },
+            {
+              'filename',
+              padding = { left = 1, right = 0 },
+              path = 1,
+              color = function()
+                return { fg = is_second_tier_file() and mocha.overlay1 or mocha.text }
+              end,
+            },
             {
               function()
                 local buffer_count = require('core.utils').get_buffer_count()
