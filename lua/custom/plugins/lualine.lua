@@ -1,13 +1,21 @@
 local mocha = require('catppuccin.palettes').get_palette 'mocha'
 
+local second_tier_files = {}
+
 local function is_second_tier_file()
-  local file_path = require('config.utils').get_current_buffer_path()
   if require('config.utils').is_file_outside_cwd(file_path) then
     return true
   end
-  if require('config.utils').is_file_git_gitignored(file_path) then
-    return true
+
+  if not require('config.utils').is_in_git_repo(file_path) then
+    return false
   end
+  --
+  -- print 'why here'
+  --
+  -- if require('config.utils').is_file_git_gitignored(file_path) then
+  --   return true
+  -- end
   return false
 end
 -- or if the file is outside of the cwd and not a symlink
@@ -93,7 +101,9 @@ return {
               padding = { left = 1, right = 0 },
               path = 1,
               color = function()
-                return { fg = is_second_tier_file() and mocha.overlay1 or mocha.text }
+                local file_path = utils.get_current_buffer_path()
+                local is_second_tier = utils.get_cached_or_compute(second_tier_files, file_path, is_second_tier_file, file_path)
+                return { fg = is_second_tier and mocha.overlay1 or mocha.text }
               end,
             },
             {

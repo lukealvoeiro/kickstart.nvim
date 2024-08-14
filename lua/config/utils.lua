@@ -80,8 +80,6 @@ function M.is_file_git_gitignored(file_path)
   local result = handle:read '*a'
   handle:close()
 
-  print('gitignore res', result)
-
   if result ~= '' then
     return true
   else
@@ -112,6 +110,48 @@ function M.get_current_buffer_path()
   --- @type string
   local abs_path = vim.fn.fnamemodify(buf_name, ':p')
   return abs_path
+end
+
+function M.is_in_git_repo(file_path)
+  local handle = io.popen 'git rev-parse --is-inside-work-tree 2>/dev/null'
+  if not handle then
+    return false
+  end
+  local _, exit_code = handle:close()
+  if exit_code ~= 0 then
+    return false
+  end
+  print('File/dir is in a git repo ' .. file_path)
+  local check_ignore_handle = io.popen('git check-ignore ' .. file_path)
+  if not check_ignore_handle then
+    return false
+  end
+  local check_ignore_result = check_ignore_handle:read '*a'
+  check_ignore_handle:close()
+  if check_ignore_result ~= '' then
+    return true
+  else
+    return false
+  end
+end
+
+--- Gets a cached value or computes it and caches the result.
+--- @param cache table<string, any>: The table used to store cached values.
+--- @param key string: The key to identify the cached value.
+--- @param compute_func function: The function to compute the value if not cached.
+--- @param ... any: Additional arguments to pass to the compute function.
+--- @return any: The cached or computed value.
+function M.get_cached_or_compute(cache, key, compute_func, ...)
+  -- Check if the value is already cached
+  if cache[key] then
+    return cache[key]
+  end
+
+  -- Call the compute function with arguments and cache the result
+  local result = compute_func(...)
+  cache[key] = result
+
+  return result
 end
 
 return M
