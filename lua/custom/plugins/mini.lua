@@ -23,21 +23,6 @@ return {
 
       require('mini.icons').setup()
       MiniIcons.mock_nvim_web_devicons()
-
-      -- Inline diffs
-      require('mini.diff').setup {
-        view = {
-          style = 'sign',
-          signs = {
-            add = '',
-            change = '',
-            delete = '',
-          },
-          priority = 1000,
-        },
-      }
-
-      vim.keymap.set('n', '+', ':lua MiniDiff.toggle_overlay()<CR>', { desc = 'Diff' })
     end,
   },
 }

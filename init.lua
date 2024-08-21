@@ -6,9 +6,24 @@ require 'config.autocmds'
 -- - note taking
 -- remember last dirs you were in
 -- figure out dap for python
+-- preview parameters for a function as you open the brakets
+-- rearrange the priority of cmp
+-- ghost text be kinda wierd (maybe it only shows up if your completion has same starting chars)
+-- check out what else is available in noice
+-- fix trouble highlight groups
+-- add trouble as source of diagnostics
+-- ask baxen for his pyright configuration
+-- figure out how to refocus to lazygit if you happen to press esc
+-- find a new remap for 's' as i don't use it enough
+-- learn how to use 'g'
+-- trouble diagnostics in lualine
+-- resize buffers/splits using arrow keys
+-- start using grapple or harpoon by seeing how much time you've spent in a buffer recently and if its over a certain amount and not in harpoon list, ask u to change
+-- thing like lazy vim does that asks you whether you wanna close unsaved buffer before closing it with q
+-- figure out ``` usage
 
 -- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
+--  See `:help lua-guide-autocommands
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -31,7 +46,6 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  To update plugins you can run
 --    :Lazy update
---
 local signs = require('config.constants').diagnostic_symbols
 for type, icon in pairs(signs) do
   local hl = 'DiagnosticSign' .. type:gsub('^%l', string.upper)
@@ -47,12 +61,6 @@ require('lazy').setup({
   -- keys can be used to configure plugin behavior/loading/etc.
   --
   -- Use `opts = {}` to force a plugin to be loaded.
-  --
-  --  This is equivalent to:
-  --    require('Comment').setup({})
-
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
@@ -383,18 +391,12 @@ require('lazy').setup({
             pyright = {
               disableOrganizeImports = true, -- Using Ruff
               openFilesOnly = false,
-              python = {
-                analysis = {
-                  diagnosticMode = 'workspace',
-                },
-              },
             },
           },
         },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
-                --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
@@ -538,4 +540,3 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-
