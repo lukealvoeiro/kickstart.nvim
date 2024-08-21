@@ -57,7 +57,9 @@ return {
         map('n', '<leader>ghd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
         map('n', '+', function()
           local hunks = require('gitsigns').get_hunks()
-          if not (hunks and next(hunks) ~= nil) then
+          local buf_name = vim.api.nvim_buf_get_name(0)
+
+          if not buf_name:match '^gitsigns://' and not (hunks and next(hunks) ~= nil) then
             vim.notify('No git diff for this file', vim.log.levels.WARN)
             return
           end
