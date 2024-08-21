@@ -55,9 +55,29 @@ return {
         map('n', '<leader>ghp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
         map('n', '<leader>ghb', gitsigns.blame_line, { desc = 'git [b]lame line' })
         map('n', '<leader>ghd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
-        map('n', '<leader>ghD', function()
+        map('n', '+', function()
+          local hunks = require('gitsigns').get_hunks()
+          if not (hunks and next(hunks) ~= nil) then
+            vim.notify('No git diff for this file', vim.log.levels.WARN)
+            return
+          end
+          -- check if buffer starts with gitsigns prefix
+          local buffers = vim.api.nvim_list_bufs()
+          -- Iterate over all buffers
+          for _, buf in ipairs(buffers) do
+            -- Get the name of the buffer
+            local buf_name = vim.api.nvim_buf_get_name(buf)
+
+            -- Check if the buffer name starts with 'gitsigns://'
+            if buf_name:match '^gitsigns://' then
+              -- Close the buffer
+              vim.api.nvim_buf_delete(buf, { force = true })
+              return
+            end
+          end
+
           gitsigns.diffthis '@'
-        end, { desc = 'git [D]iff against last commit' })
+        end)
         -- Toggles
         map('n', '<leader>gtb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
         map('n', '<leader>gtD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
