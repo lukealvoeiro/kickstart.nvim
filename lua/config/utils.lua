@@ -121,7 +121,6 @@ function M.is_in_git_repo(file_path)
   if exit_code ~= 0 then
     return false
   end
-  print('File/dir is in a git repo ' .. file_path)
   local check_ignore_handle = io.popen('git check-ignore ' .. file_path)
   if not check_ignore_handle then
     return false
