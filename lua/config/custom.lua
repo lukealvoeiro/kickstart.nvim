@@ -1,6 +1,9 @@
 local M = {}
 
 function M.open_git_status(dir)
+  local current_buf_name = vim.api.nvim_buf_get_name(0)
+  vim.cmd 'TSContextDisable'
+
   vim.fn.chdir(dir)
   vim.cmd 'Git'
 
@@ -27,6 +30,7 @@ function M.open_git_status(dir)
   -- Set up keymaps and autocmds
   vim.keymap.set('n', 'q', function()
     vim.api.nvim_win_close(fug_win, true)
+    vim.cmd 'TSContextEnable'
   end, {
     buffer = fug_buf,
     desc = 'Close fugitive window with just q',
@@ -34,6 +38,7 @@ function M.open_git_status(dir)
 
   vim.keymap.set('n', '<Esc>', function()
     vim.api.nvim_win_close(fug_win, true)
+    vim.cmd 'TSContextEnable'
   end, {
     buffer = fug_buf,
     desc = 'Close fugitive window with just <Esc>',
@@ -43,12 +48,23 @@ function M.open_git_status(dir)
   vim.api.nvim_create_autocmd('BufLeave', {
     buffer = fug_buf,
     callback = function()
+      vim.cmd 'TSContextEnable'
       vim.api.nvim_win_close(fug_win, true)
       vim.api.nvim_del_augroup_by_id(fug_floatwin)
     end,
     desc = 'Close fugitive floating window after we leave it',
     group = fug_floatwin,
   })
+
+  vim.schedule(function()
+    local lines = vim.api.nvim_buf_get_lines(fug_buf, 0, -1, false)
+    for i, line in ipairs(lines) do
+      if line:find(vim.fn.fnamemodify(current_buf_name, ':.')) then
+        vim.api.nvim_win_set_cursor(fug_win, { i, 0 })
+        break
+      end
+    end
+  end)
 end
 
 return M
