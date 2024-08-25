@@ -26,7 +26,8 @@ function M.open_git_status(dir)
 
   -- Immediately set the window configuration
   vim.api.nvim_win_set_config(fug_win, win_opts)
-
+  vim.api.nvim_win_set_option(fug_win, 'number', true)
+  vim.api.nvim_win_set_option(fug_win, 'relativenumber', true)
   -- Set up keymaps and autocmds
   vim.keymap.set('n', 'q', function()
     vim.api.nvim_win_close(fug_win, true)
