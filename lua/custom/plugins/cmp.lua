@@ -118,9 +118,9 @@ return {
           },
         },
         experimental = {
-          ghost_text = {
-            hl_group = 'CmpGhostText',
-          },
+          -- ghost_text = {
+          -- hl_group = 'CmpGhostText',
+          -- },
         },
         ---@diagnostic disable-next-line: missing-fields
         formatting = {
