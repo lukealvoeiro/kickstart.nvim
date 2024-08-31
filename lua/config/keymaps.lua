@@ -106,7 +106,8 @@ vim.keymap.set('n', '<down>', '<cmd> TmuxNavigateDown<CR>')
 vim.keymap.set('n', '<up>', '<cmd> TmuxNavigateUp<CR>')
 
 -- Insert newline without entering insert mode
-vim.keymap.set('n', '<S-CR>', '@="m`o<C-V><Esc>``"<CR>', { desc = '[Enter] a new line below' }) -- <CR> is "Enter"
+-- vim.keymap.set('n', '<S-CR>', '@="m`o<C-V><Esc>``"<CR>', { desc = '[Enter] a new line below' }) -- <CR> is "Enter"
+--
 vim.keymap.set('n', '<M-p>', 'o<Esc>p', { desc = 'Paste on new line below' })
 vim.keymap.set('n', '<M-P>', 'o<Esc>P', { desc = 'Paste on new line above' })
 
