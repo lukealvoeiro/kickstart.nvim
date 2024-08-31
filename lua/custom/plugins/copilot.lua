@@ -3,7 +3,7 @@ return {
   config = function()
     require('copilot').setup {
       suggestion = { enabled = true, auto_trigger = true, debounce = 50, keymap = {
-        accept = '<C-CR>',
+        accept = '<S-CR>',
       } },
       panel = { enabled = false },
     }
