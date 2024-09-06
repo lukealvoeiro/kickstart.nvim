@@ -96,6 +96,9 @@ vim.keymap.set('n', '<leader>tf', '<cmd>FormatToggle<CR>', { desc = 'Toggle form
 -- or just use <C-\><C-n> to exit terminal mode
 -- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+vim.keymap.set('n', '-', "<cmd>lua require('oil').open_float()<CR>", { desc = 'Open oil' })
+vim.keymap.set('n', '_', '<cmd>Oil<CR>', { desc = 'Open oil' })
+
 -- Remap backspace to be ^. This is useful for switching between files and going to the first char on the line
 vim.keymap.set('n', '<BS>', '^', { desc = 'Go to first char on line' })
 
