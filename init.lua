@@ -400,7 +400,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
-        ruff_lsp = {},
+        ruff = {},
 
         lua_ls = {
           -- cmd = {...},
