@@ -1,11 +1,12 @@
-require 'config.options'
-require 'config.keymaps'
-require 'config.autocmds'
+require 'core.options'
+require 'core.keymaps'
+require 'core.autocmds'
 
 -- TODOs:
 -- - note taking
 -- remember last dirs you were in
 -- figure out dap for python
+-- border for lazy and for mason
 -- preview parameters for a function as you open the brakets
 -- ghost text be kinda wierd (maybe it only shows up if your completion has same starting chars)
 -- check out what else is available in noice
@@ -43,7 +44,7 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  To update plugins you can run
 --    :Lazy update
-local signs = require('config.constants').diagnostic_symbols
+local signs = require('core.constants').diagnostic_symbols
 for type, icon in pairs(signs) do
   local hl = 'DiagnosticSign' .. type:gsub('^%l', string.upper)
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })

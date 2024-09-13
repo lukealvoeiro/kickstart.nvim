@@ -44,6 +44,7 @@ return {
         harpoon = true,
         fidget = true,
         cmp = true,
+        leap = true,
         flash = true,
         gitsigns = true,
         illuminate = true,

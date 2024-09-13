@@ -3,17 +3,17 @@ local mocha = require('catppuccin.palettes').get_palette 'mocha'
 local second_tier_files = {}
 
 local function is_second_tier_file(file_path)
-  if require('config.utils').is_file_outside_cwd(file_path) then
+  if require('core.utils').is_file_outside_cwd(file_path) then
     return true
   end
 
-  if not require('config.utils').is_in_git_repo(file_path) then
+  if not require('core.utils').is_in_git_repo(file_path) then
     return false
   end
   --
   -- print 'why here'
   --
-  if require('config.utils').is_file_git_gitignored(file_path) then
+  if require('core.utils').is_file_git_gitignored(file_path) then
     return true
   end
   return false
@@ -73,8 +73,8 @@ return {
     event = 'VeryLazy',
     dependencies = { 'echasnovski/mini.icons' },
     opts = function()
-      local utils = require 'config.utils'
-      local icon_bg_color = require('config.utils').get_hlgroup('LineNr').fg
+      local utils = require 'core.utils'
+      local icon_bg_color = require('core.utils').get_hlgroup('LineNr').fg
       local copilot_colors = {
         [''] = utils.get_hlgroup 'Comment',
         ['Normal'] = utils.get_hlgroup 'Comment',
@@ -114,7 +114,7 @@ return {
                 return '+' .. buffer_count - 1 .. ' '
               end,
               cond = function()
-                return require('config.utils').get_buffer_count() > 1
+                return require('core.utils').get_buffer_count() > 1
               end,
               color = utils.get_hlgroup('Operator', nil),
               padding = { left = 0, right = 1 },

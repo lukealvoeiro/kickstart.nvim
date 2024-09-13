@@ -37,7 +37,7 @@ return {
     },
     config = function()
       -- See `:help cmp`
-      local comment_hl = require('config.utils').get_hlgroup 'Comment'
+      local comment_hl = require('core.utils').get_hlgroup 'Comment'
       vim.api.nvim_set_hl(0, 'CmpGhostText', { fg = comment_hl.fg, italic = true })
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
@@ -125,7 +125,7 @@ return {
         ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = function(_, vim_item)
-            local icons = require('config.constants').icons
+            local icons = require('core.constants').icons
             vim_item.kind = string.format('%s %s', icons[vim_item.kind], vim_item.kind)
             local content = vim_item.abbr
             local fixed_width = false

@@ -1,6 +1,6 @@
 local close_in_float = {
   function()
-    if require('config.utils').is_curr_buffer_float() then
+    if require('core.utils').is_curr_buffer_float() then
       require('oil.actions').close.callback()
     end
   end,
