@@ -21,4 +21,11 @@ return {
   {
     'tpope/vim-fugitive',
   },
+  {
+    'tpope/vim-fugitive',
+  },
+  {
+    -- opens a file in github
+    'almo7aya/openingh.nvim',
+  },
 }

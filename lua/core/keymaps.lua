@@ -105,18 +105,20 @@ vim.keymap.set('n', '_', '<cmd>Oil<CR>', { desc = 'Open oil' })
 vim.keymap.set('n', '<BS>', '^', { desc = 'Go to first char on line' })
 
 -- Remap arrow keys for tmux integration
-vim.keymap.set('n', '<left>', '<cmd> TmuxNavigateLeft<CR>')
-vim.keymap.set('n', '<right>', '<cmd> TmuxNavigateRight<CR>')
-vim.keymap.set('n', '<down>', '<cmd> TmuxNavigateDown<CR>')
-vim.keymap.set('n', '<up>', '<cmd> TmuxNavigateUp<CR>')
+vim.keymap.set('n', '<left>', '<C-w>>')
+vim.keymap.set('n', '<right>', '<C-w><')
+vim.keymap.set('n', '<down>', '<C-w>-')
+vim.keymap.set('n', '<up>', '<C-w>+')
 
 -- Insert newline without entering insert mode
--- vim.keymap.set('n', '<S-CR>', '@="m`o<C-V><Esc>``"<CR>', { desc = '[Enter] a new line below' }) -- <CR> is "Enter"
+vim.keymap.set('n', '<S-CR>', '@="m`o<C-V><Esc>``"<CR>', { desc = '[Enter] a new line below' })
 --
 vim.keymap.set('n', '<M-p>', 'o<Esc>p', { desc = 'Paste on new line below' })
 vim.keymap.set('n', '<M-P>', 'o<Esc>P', { desc = 'Paste on new line above' })
 
-vim.api.nvim_set_keymap('n', '<leader>ee', [[:lua YankDiagnosticError()<CR>]], { noremap = true, silent = true, desc = 'Copy error' })
+vim.keymap.set('n', '<leader>ee', function()
+  require('config.commands').yank_diagnostic_error()
+end, { noremap = true, silent = true, desc = 'Copy error' })
 
 vim.keymap.set('n', '<leader>gg', function()
   require('config.custom').open_git_status()

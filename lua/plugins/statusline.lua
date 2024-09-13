@@ -98,7 +98,7 @@ return {
             { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
             {
               'filename',
-              padding = { left = 1, right = 0 },
+              padding = { left = 1, right = 1 },
               path = 1,
               color = function()
                 local file_path = utils.get_current_buffer_path()
