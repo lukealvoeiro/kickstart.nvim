@@ -6,13 +6,13 @@ return {
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help ibl`
+    --
     main = 'ibl',
     opts = {
       indent = {
-        char = '🭰',
-        tab_char = '🭰',
+        char = '▏',
       },
-      scope = { show_start = false, show_end = false },
+      scope = { show_start = false, show_end = false, show_exact_scope = false },
       exclude = {
         filetypes = {
           'help',
