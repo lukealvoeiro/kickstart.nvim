@@ -143,6 +143,21 @@ function M.shallow_copy(t)
   return t2
 end
 
+function M.table_merge(t1, t2)
+  for k, v in pairs(t2) do
+    if type(v) == 'table' then
+      if type(t1[k] or false) == 'table' then
+        M.table_merge(t1[k] or {}, t2[k] or {})
+      else
+        t1[k] = v
+      end
+    else
+      t1[k] = v
+    end
+  end
+  return t1
+end
+
 --- Gets a cached value or computes it and caches the result.
 --- @param cache table<string, any>: The table used to store cached values.
 --- @param key string: The key to identify the cached value.

@@ -56,6 +56,39 @@ return { -- Fuzzy Finder (files, lsp, etc)
       return builtin.find_files { hidden = true, no_ignore = true, prompt_title = 'Find All Files' }
     end
 
+    local find_projects = function(directory)
+      directory = '~/Development/' or directory
+      require('telescope.builtin').find_files {
+        prompt_title = 'Find Directories',
+        cwd = directory,
+        find_command = { 'sh', '-c', 'find ' .. directory .. ' -maxdepth 1 -type d -print' },
+        entry_maker = function(entry)
+          return {
+            value = entry,
+            display = function()
+              -- TODO: use a MiniIconsDirectory highlight group for the directory icon
+              -- TODO: only display the last part of the path
+              local icon = require('mini.icons').get('default', 'Directory')
+              return icon .. ' ' .. entry
+            end,
+            display = entry,
+            ordinal = entry,
+            path = entry,
+          }
+        end,
+        attach_mappings = function(_, map)
+          map('i', '<CR>', function(prompt_bufnr)
+            local selection = require('telescope.actions.state').get_selected_entry()
+            require('telescope.actions').close(prompt_bufnr)
+            local selected_path = selection.path or selection[1]
+            vim.api.nvim_set_current_dir(selected_path)
+            require('oil').open_float(selected_path)
+          end)
+          return true
+        end,
+      }
+    end
+
     -- See `:help telescope.builtin`
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -67,6 +100,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+    vim.keymap.set('n', '<leader>sp', find_projects, { desc = '[S]earch [P]rojects' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
     -- Slightly advanced example of overriding default behavior and theme
