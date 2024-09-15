@@ -1,5 +1,15 @@
 return {
   {
+    'Shatur/neovim-ayu',
+    config = function()
+      local colors = require 'ayu.colors'
+      colors.generate(false)
+      require('ayu').setup {
+        terminal = true,
+      }
+    end,
+  },
+  {
     'catppuccin/nvim',
     lazy = true,
     init = function()

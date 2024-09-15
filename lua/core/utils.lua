@@ -134,6 +134,15 @@ function M.is_in_git_repo(file_path)
   end
 end
 
+-- Define a generic table type
+function M.shallow_copy(t)
+  local t2 = {}
+  for k, v in pairs(t) do
+    t2[k] = v
+  end
+  return t2
+end
+
 --- Gets a cached value or computes it and caches the result.
 --- @param cache table<string, any>: The table used to store cached values.
 --- @param key string: The key to identify the cached value.

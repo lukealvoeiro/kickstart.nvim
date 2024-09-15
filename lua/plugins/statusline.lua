@@ -86,7 +86,7 @@ return {
         options = {
           component_separators = { left = ' ', right = ' ' },
           section_separators = { left = ' ', right = ' ' },
-          theme = theme(),
+          theme = 'ayu',
           globalstatus = true,
           disabled_filetypes = { statusline = { 'dashboard', 'alpha' } },
         },

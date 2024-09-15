@@ -53,6 +53,12 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = function()
+    require('core.highlights').setup()
+  end,
+})
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
