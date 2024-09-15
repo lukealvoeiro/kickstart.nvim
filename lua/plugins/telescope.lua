@@ -57,7 +57,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     end
 
     local find_projects = function(directory)
-      directory = '~/Development/' or directory
+      directory = '~/Development' or directory
       require('telescope.builtin').find_files {
         prompt_title = 'Find Directories',
         cwd = directory,
@@ -71,7 +71,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
               local icon = require('mini.icons').get('default', 'Directory')
               return icon .. ' ' .. entry
             end,
-            display = entry,
             ordinal = entry,
             path = entry,
           }

@@ -14,6 +14,7 @@ M.setup = function()
   vim.inspect(ts_context_bottom)
 
   vim.api.nvim_set_hl(0, 'TreesitterContext', ts_context)
+  vim.api.nvim_set_hl(0, 'TreesitterContextLineNumber', ts_context)
   vim.api.nvim_set_hl(0, 'TreesitterContextBottom', ts_context_bottom)
 end
 
