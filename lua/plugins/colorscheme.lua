@@ -6,6 +6,12 @@ return {
       colors.generate(false)
       require('ayu').setup {
         terminal = true,
+        mirage = true,
+        overrides = {
+          LineNr = { fg = colors.special, bold = true },
+          LineNrAbove = { fg = colors.comment },
+          LineNrBelow = { fg = colors.comment },
+        },
       }
     end,
   },
@@ -13,11 +19,11 @@ return {
     'catppuccin/nvim',
     lazy = true,
     init = function()
-      vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.colorscheme 'ayu'
     end,
     name = 'catppuccin',
     opts = {
-      transparent_background = true,
+      transparent_background = false,
       no_italic = true,
       no_bold = false,
       integrations = {
