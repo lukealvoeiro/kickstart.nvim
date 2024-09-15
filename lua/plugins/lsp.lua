@@ -19,6 +19,11 @@ return { -- LSP Configuration & Plugins
     --    That is to say, every time a new file is opened that is associated with
     --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
     --    function will be executed to configure the current buffer
+
+    for type, icon in pairs(require('core.constants').diagnostic_symbols) do
+      local hl = 'DiagnosticSign' .. type:gsub('^%l', string.upper)
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
+    end
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)

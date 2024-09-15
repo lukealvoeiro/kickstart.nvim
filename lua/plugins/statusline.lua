@@ -74,12 +74,13 @@ return {
     dependencies = { 'echasnovski/mini.icons' },
     opts = function()
       local utils = require 'core.utils'
-      local icon_bg_color = require('core.utils').get_hlgroup('LineNr').fg
+      local icon_bg_color = utils.get_hlgroup('LineNr').fg
+      local lualine_bg_color = utils.get_hlgroup('Normal').bg
       local copilot_colors = {
-        [''] = utils.get_hlgroup 'Comment',
-        ['Normal'] = utils.get_hlgroup 'Comment',
-        ['Warning'] = utils.get_hlgroup 'DiagnosticError',
-        ['InProgress'] = utils.get_hlgroup 'DiagnosticWarn',
+        [''] = utils.table_merge(utils.get_hlgroup 'Comment', { bg = lualine_bg_color }),
+        ['Normal'] = utils.table_merge(utils.get_hlgroup 'Comment', { bg = lualine_bg_color }),
+        ['Warning'] = utils.table_merge(utils.get_hlgroup 'DiagnosticError', { bg = lualine_bg_color }),
+        ['InProgress'] = utils.table_merge(utils.get_hlgroup 'DiagnosticWarn', { bg = lualine_bg_color }),
       }
 
       return {

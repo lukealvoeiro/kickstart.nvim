@@ -1,3 +1,5 @@
+vim.g.transparency_enabled = true
+
 return {
   {
     'Shatur/neovim-ayu',
@@ -7,11 +9,23 @@ return {
       require('ayu').setup {
         terminal = true,
         mirage = true,
-        overrides = {
-          LineNr = { fg = colors.special, bold = true },
-          LineNrAbove = { fg = colors.comment },
-          LineNrBelow = { fg = colors.comment },
-        },
+        overrides = function()
+          return require('core.utils').table_merge({
+            LineNr = { fg = colors.special, bold = true },
+            LineNrAbove = { fg = colors.comment },
+            LineNrBelow = { fg = colors.comment },
+          }, vim.g.transparency_enabled and {
+            Normal = { bg = 'None' },
+            ColorColumn = { bg = 'None' },
+            SignColumn = { bg = 'None' },
+            Folded = { bg = 'None' },
+            FoldColumn = { bg = 'None' },
+            CursorLine = { bg = 'None' },
+            CursorColumn = { bg = 'None' },
+            WhichKeyFloat = { bg = 'None' },
+            VertSplit = { bg = 'None' },
+          } or {})
+        end,
       }
     end,
   },

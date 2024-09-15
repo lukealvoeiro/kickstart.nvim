@@ -7,11 +7,6 @@ M.diagnostic_symbols = {
   hint = ' ',
 }
 
-for type, icon in pairs(M.diagnostic_symbols) do
-  local hl = 'DiagnosticSign' .. type:gsub('^%l', string.upper)
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
-end
-
 M.icons = {
   Array = ' ',
   Boolean = '󰨙 ',

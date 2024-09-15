@@ -10,6 +10,17 @@ function M.yank_diagnostic_error()
   vim.api.nvim_win_close(win_id, true) -- close the floating window by its ID
 end
 
+vim.api.nvim_create_user_command('TransparencyToggle', function()
+  vim.b.transparency_enabled = not vim.b.transparency_enabled
+  vim.g.transparency_enabled = not vim.g.transparency_enabled
+  -- trigger pull of the current colorscheme
+  local current_colorscheme = vim.g.colors_name
+  vim.cmd 'hi clear'
+  vim.cmd('colorscheme ' .. current_colorscheme)
+end, {
+  desc = 'Toggle transparency',
+})
+
 function M.open_git_status(dir)
   local current_buf_name = vim.api.nvim_buf_get_name(0)
   vim.cmd 'TSContextDisable'
