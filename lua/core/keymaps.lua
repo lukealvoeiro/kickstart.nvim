@@ -7,6 +7,7 @@ vim.keymap.set('n', '<C-z', ':suspend', { desc = 'Suspend nvim' })
 vim.api.nvim_create_user_command('W', 'w', {})
 
 -- Paste and Delete without yanking
+vim.keymap.set('n', 'x', '"_x', { desc = 'Remove char without yanking' })
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'Paste without yanking' })
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'Delete without yanking' })
 
