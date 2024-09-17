@@ -6,14 +6,18 @@ return {
     config = function()
       local colors = require 'ayu.colors'
       colors.generate(false)
+      colors.selection_inactive = '#38485d'
       require('ayu').setup {
         terminal = true,
         mirage = true,
         overrides = function()
+          local selection_color = '#38485d'
           return require('core.utils').table_merge({
             LineNr = { fg = colors.special, bold = true },
             LineNrAbove = { fg = colors.comment },
             LineNrBelow = { fg = colors.comment },
+            Visual = { bg = selection_color },
+            IncSearch = { fg = colors.keyword, bg = selection_color },
             -- NormalFloat = { bg = '#353944' },
           }, vim.g.transparency_enabled and {
             Normal = { bg = 'None' },
