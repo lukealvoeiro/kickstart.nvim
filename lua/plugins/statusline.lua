@@ -10,9 +10,7 @@ local function is_second_tier_file(file_path)
   if not require('core.utils').is_in_git_repo(file_path) then
     return false
   end
-  --
-  -- print 'why here'
-  --
+
   if require('core.utils').is_file_git_gitignored(file_path) then
     return true
   end
@@ -97,6 +95,7 @@ return {
         ['InProgress'] = utils.get_hlgroup 'DiagnosticWarn',
       }
       local buffer_number_color = utils.get_hlgroup 'Operator'
+      buffer_number_color.bg = lualine_bg_color
 
       return {
         options = {
@@ -188,10 +187,16 @@ return {
             },
             {
               require('grapple-line').lualine,
+              padding = { left = 0, right = 0 },
             },
           },
           lualine_z = {
-            icon = { ' 󰛢 ' },
+            {
+              function()
+                return ' 󰛢 '
+              end,
+              padding = { left = 0, right = 0 },
+            },
           },
         },
         extensions = { 'lazy', 'mason', 'neo-tree', 'trouble' },
