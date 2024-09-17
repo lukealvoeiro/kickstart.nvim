@@ -49,6 +49,12 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
+        performance = {
+          event = {
+            debounce = 0, -- default is 60ms
+            throttle = 0, -- default is 30ms
+          },
+        },
         completion = { completeopt = 'menu,menuone,noinsert' },
 
         -- For an understanding of why these mappings were

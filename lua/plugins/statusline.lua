@@ -72,18 +72,10 @@ return {
     'nvim-lualine/lualine.nvim',
     event = 'VeryLazy',
     dependencies = { 'echasnovski/mini.icons' },
-    opts = function()
+    config = function(_, opts)
+      require('lualine').setup(opts)
       local utils = require 'core.utils'
       local lualine_bg_color = utils.get_hlgroup('lualine_b_normal').bg
-      local copilot_colors = {
-        [''] = utils.get_hlgroup 'Comment',
-        ['Normal'] = utils.get_hlgroup 'Comment',
-        ['Warning'] = utils.get_hlgroup 'DiagnosticError',
-        ['InProgress'] = utils.get_hlgroup 'DiagnosticWarn',
-      }
-      local buffer_number_color = utils.get_hlgroup 'Operator'
-      buffer_number_color.bg = lualine_bg_color
-      local icon_bg_color = utils.get_hlgroup('LineNr').fg
 
       local grappleLineContentInactive = utils.get_hlgroup 'Comment'
       grappleLineContentInactive.bg = lualine_bg_color
@@ -94,6 +86,17 @@ return {
 
       vim.api.nvim_set_hl(0, 'GrappleLineContentActive', grappleLineContentActive)
       vim.api.nvim_set_hl(0, 'GrappleLineContentInactive', grappleLineContentInactive)
+    end,
+    opts = function()
+      local utils = require 'core.utils'
+      local lualine_bg_color = utils.get_hlgroup('lualine_b_normal').bg
+      local copilot_colors = {
+        [''] = utils.get_hlgroup 'Comment',
+        ['Normal'] = utils.get_hlgroup 'Comment',
+        ['Warning'] = utils.get_hlgroup 'DiagnosticError',
+        ['InProgress'] = utils.get_hlgroup 'DiagnosticWarn',
+      }
+      local buffer_number_color = utils.get_hlgroup 'Operator'
 
       return {
         options = {
@@ -111,7 +114,7 @@ return {
             { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
             {
               'filename',
-              padding = { left = 1, right = 1 },
+              padding = { left = 1, right = 0 },
               path = 1,
               color = function()
                 local file_path = utils.get_current_buffer_path()
@@ -122,6 +125,7 @@ return {
             },
             {
               function()
+                -- TODO: this ain't working
                 local buffer_count = require('core.utils').get_buffer_count()
 
                 return '+' .. buffer_count - 1 .. ' '
@@ -130,11 +134,11 @@ return {
                 return require('core.utils').get_buffer_count() > 1
               end,
               color = buffer_number_color,
-              padding = { left = 2, right = 1 },
+              padding = { left = 1, right = 1 },
             },
             {
               'diff',
-              padding = { left = 2, right = 0 },
+              padding = { left = 1, right = 1 },
               source = function()
                 local gitsigns = vim.b.gitsigns_status_dict
                 if gitsigns then
@@ -182,13 +186,12 @@ return {
             {
               'progress',
             },
-          },
-          lualine_z = {
             {
               require('grapple-line').lualine,
-              icon = { ' 󰛢 ', align = 'right', color = { bg = icon_bg_color, fg = '#000000', gui = 'bold' } },
-              padding = { left = 1, right = 0 },
             },
+          },
+          lualine_z = {
+            icon = { ' 󰛢 ' },
           },
         },
         extensions = { 'lazy', 'mason', 'neo-tree', 'trouble' },
