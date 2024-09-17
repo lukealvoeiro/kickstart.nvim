@@ -3,15 +3,12 @@ require 'core.keymaps'
 require 'core.autocmds'
 
 -- TODOs:
--- remember last dirs you were in
--- fix diagnostic icons
--- winblend on completions
 -- better session name management
 -- aliases for nvim to n
 -- border for lazy and for mason
 -- figure out dap for python
--- preview parameters for a function as you open the brakets
 -- ghost text be kinda wierd (maybe it only shows up if your completion has same starting chars)
+-- preview parameters for a function as you open the brakets
 -- check out what else is available in noice
 -- fix trouble highlight groups
 -- add trouble as source of diagnostics

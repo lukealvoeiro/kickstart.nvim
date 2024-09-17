@@ -74,14 +74,26 @@ return {
     dependencies = { 'echasnovski/mini.icons' },
     opts = function()
       local utils = require 'core.utils'
-      local icon_bg_color = utils.get_hlgroup('LineNr').fg
-      local lualine_bg_color = utils.get_hlgroup('Normal').bg
+      local lualine_bg_color = utils.get_hlgroup('lualine_b_normal').bg
       local copilot_colors = {
-        [''] = utils.table_merge(utils.get_hlgroup 'Comment', { bg = lualine_bg_color }),
-        ['Normal'] = utils.table_merge(utils.get_hlgroup 'Comment', { bg = lualine_bg_color }),
-        ['Warning'] = utils.table_merge(utils.get_hlgroup 'DiagnosticError', { bg = lualine_bg_color }),
-        ['InProgress'] = utils.table_merge(utils.get_hlgroup 'DiagnosticWarn', { bg = lualine_bg_color }),
+        [''] = utils.get_hlgroup 'Comment',
+        ['Normal'] = utils.get_hlgroup 'Comment',
+        ['Warning'] = utils.get_hlgroup 'DiagnosticError',
+        ['InProgress'] = utils.get_hlgroup 'DiagnosticWarn',
       }
+      local buffer_number_color = utils.get_hlgroup 'Operator'
+      buffer_number_color.bg = lualine_bg_color
+      local icon_bg_color = utils.get_hlgroup('LineNr').fg
+
+      local grappleLineContentInactive = utils.get_hlgroup 'Comment'
+      grappleLineContentInactive.bg = lualine_bg_color
+
+      local grappleLineContentActive = utils.get_hlgroup 'LineNr'
+      grappleLineContentActive.bg = lualine_bg_color
+      grappleLineContentActive.bold = true
+
+      vim.api.nvim_set_hl(0, 'GrappleLineContentActive', grappleLineContentActive)
+      vim.api.nvim_set_hl(0, 'GrappleLineContentInactive', grappleLineContentInactive)
 
       return {
         options = {
@@ -117,8 +129,8 @@ return {
               cond = function()
                 return require('core.utils').get_buffer_count() > 1
               end,
-              color = utils.get_hlgroup('Operator', nil),
-              padding = { left = 0, right = 1 },
+              color = buffer_number_color,
+              padding = { left = 2, right = 1 },
             },
             {
               'diff',
@@ -160,7 +172,9 @@ return {
                   return
                 end
                 local status = require('copilot.api').status.data
-                return copilot_colors[status.status] or copilot_colors['']
+                local colors = copilot_colors[status.status] or copilot_colors['']
+                colors.bg = lualine_bg_color
+                return colors
               end,
             },
           },
@@ -171,7 +185,7 @@ return {
           },
           lualine_z = {
             {
-              require('grapple-line').status,
+              require('grapple-line').lualine,
               icon = { ' 󰛢 ', align = 'right', color = { bg = icon_bg_color, fg = '#000000', gui = 'bold' } },
               padding = { left = 1, right = 0 },
             },
@@ -189,8 +203,8 @@ return {
     },
     opts = {
       colors = {
-        active = 'LineNr',
-        inactive = 'LineNrAbove',
+        active = 'GrappleLineContentActive',
+        inactive = 'GrappleLineContentInactive',
       },
     },
   },

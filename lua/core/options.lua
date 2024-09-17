@@ -2,9 +2,9 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- For Neovide
-vim.o.guifont = 'Pragmasevka Nerd Font:h16'
+vim.o.guifont = 'ZedMono Nerd Font:h17'
 vim.g.neovide_remember_window_size = true
-vim.g.neovide_transparency = 0.15
+vim.g.neovide_transparency = 0.90
 vim.g.neovide_window_blurred = true
 
 vim.opt.fillchars:append { diff = '╱' } -- makes diffs look better

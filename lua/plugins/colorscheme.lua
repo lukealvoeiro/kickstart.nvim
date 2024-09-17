@@ -1,4 +1,4 @@
-vim.g.transparency_enabled = true
+vim.g.transparency_enabled = false
 
 return {
   {
@@ -14,6 +14,7 @@ return {
             LineNr = { fg = colors.special, bold = true },
             LineNrAbove = { fg = colors.comment },
             LineNrBelow = { fg = colors.comment },
+            -- NormalFloat = { bg = '#353944' },
           }, vim.g.transparency_enabled and {
             Normal = { bg = 'None' },
             ColorColumn = { bg = 'None' },

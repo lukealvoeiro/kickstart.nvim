@@ -16,6 +16,10 @@ M.setup = function()
   vim.api.nvim_set_hl(0, 'TreesitterContext', ts_context)
   vim.api.nvim_set_hl(0, 'TreesitterContextLineNumber', ts_context)
   vim.api.nvim_set_hl(0, 'TreesitterContextBottom', ts_context_bottom)
+
+  local win_separator = utils.get_hlgroup 'WinSeparator'
+  win_separator.bg = 'NONE'
+  vim.api.nvim_set_hl(0, 'WinSeparator', win_separator)
 end
 
 return M

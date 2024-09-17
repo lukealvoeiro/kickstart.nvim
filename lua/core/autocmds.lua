@@ -59,6 +59,21 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   end,
 })
 
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    if client.name == 'ruff' then
+      -- Disable hover in favor of Pyright
+      client.server_capabilities.hoverProvider = false
+    end
+  end,
+  desc = 'LSP: Disable hover capability from Ruff',
+})
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -79,6 +94,22 @@ vim.api.nvim_create_autocmd('User', {
     if is_float then
       vim.api.nvim_win_close(win_number, false)
     end
+  end,
+})
+
+-- Paint the background of the terminal so there's no padding
+vim.api.nvim_create_autocmd({ 'UIEnter', 'ColorScheme' }, {
+  callback = function()
+    local normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
+    if not normal.bg then
+      return
+    end
+    io.write(string.format('\027]11;#%06x\027\\', normal.bg))
+  end,
+})
+vim.api.nvim_create_autocmd('UILeave', {
+  callback = function()
+    io.write '\027]111\027\\'
   end,
 })
 
