@@ -97,6 +97,26 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
+vim.api.nvim_create_autocmd('ModeChanged', {
+  desc = 'Modify the statusline colors when changing modes',
+  callback = function()
+    local utils = require 'core.utils'
+    local mode_color = {
+      n = utils.get_hlgroup 'lualine_b_normal',
+      i = utils.get_hlgroup 'lualine_b_insert',
+      v = utils.get_hlgroup 'lualine_b_visual',
+      [' '] = utils.get_hlgroup 'lualine_b_normal',
+      V = utils.get_hlgroup 'lualine_b_visual',
+      c = utils.get_hlgroup 'lualine_b_command',
+      R = utils.get_hlgroup 'lualine_b_replace',
+    }
+    local mode = vim.fn.mode()
+    local color = mode_color[mode]
+    color.bold = true
+    vim.api.nvim_set_hl(0, 'GrappleLineContentActive', color)
+  end,
+})
+
 -- Paint the background of the terminal so there's no padding
 vim.api.nvim_create_autocmd({ 'UIEnter', 'ColorScheme' }, {
   callback = function()

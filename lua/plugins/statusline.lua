@@ -16,54 +16,6 @@ local function is_second_tier_file(file_path)
   end
   return false
 end
--- or if the file is outside of the cwd and not a symlink
-
-local theme = function()
-  local colors = {
-    darkgray = mocha.crust,
-    gray = mocha.overlay1,
-    innerbg = nil,
-    outerbg = nil,
-    normal = mocha.blue,
-    insert = mocha.green,
-    visual = mocha.peach,
-    replace = mocha.red,
-    command = mocha.peach,
-    cyan = mocha.sky,
-  }
-  return {
-    inactive = {
-      a = { fg = colors.gray, bg = colors.outerbg },
-      b = { fg = colors.cyan, bg = colors.outerbg },
-      c = { fg = colors.text, bg = colors.innerbg },
-    },
-    visual = {
-      a = { bg = colors.outerbg, fg = colors.visual, gui = 'bold' },
-      b = { fg = colors.cyan, bg = colors.outerbg },
-      c = { fg = colors.text, bg = colors.innerbg },
-    },
-    replace = {
-      a = { bg = colors.outerbg, fg = colors.replace, gui = 'bold' },
-      b = { fg = colors.cyan, bg = colors.outerbg },
-      c = { fg = colors.text, bg = colors.innerbg },
-    },
-    normal = {
-      a = { bg = colors.outerbg, fg = colors.normal, gui = 'bold' },
-      b = { fg = colors.cyan, bg = colors.outerbg },
-      c = { fg = colors.text, bg = colors.innerbg },
-    },
-    insert = {
-      a = { bg = colors.outerbg, fg = colors.insert, gui = 'bold' },
-      b = { fg = colors.cyan, bg = colors.outerbg },
-      c = { fg = colors.text, bg = colors.innerbg },
-    },
-    command = {
-      a = { bg = colors.outerbg, fg = colors.command, gui = 'bold' },
-      b = { fg = colors.cyan, bg = colors.outerbg },
-      c = { fg = colors.text, bg = colors.innerbg },
-    },
-  }
-end
 
 return {
   {
@@ -78,7 +30,7 @@ return {
       local grappleLineContentInactive = utils.get_hlgroup 'Comment'
       grappleLineContentInactive.bg = lualine_bg_color
 
-      local grappleLineContentActive = utils.get_hlgroup 'LineNr'
+      local grappleLineContentActive = utils.get_hlgroup 'lualine_b_normal'
       grappleLineContentActive.bg = lualine_bg_color
       grappleLineContentActive.bold = true
 
