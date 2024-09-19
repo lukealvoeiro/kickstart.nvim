@@ -2,8 +2,8 @@ local function augroup(name)
   return vim.api.nvim_create_augroup('lalvoeiro_' .. name, { clear = true })
 end
 
--- resize splits if window got resized
 vim.api.nvim_create_autocmd({ 'VimResized' }, {
+  desc = 'Resize splits when the window is resized',
   group = augroup 'resize_splits',
   callback = function()
     local current_tab = vim.fn.tabpagenr()
@@ -12,8 +12,8 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
   end,
 })
 
--- close some filetypes with <q>
 vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Close certain filetypes with <q>',
   group = augroup 'close_with_q',
   pattern = {
     'PlenaryTestPopup',
@@ -35,8 +35,8 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd('BufReadPost', {
+  desc = 'Go to the last location when opening a buffer',
   group = augroup 'last_loc',
   callback = function(event)
     local exclude = { 'gitcommit' }
@@ -54,12 +54,14 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 })
 
 vim.api.nvim_create_autocmd('ColorScheme', {
+  desc = 'Override all colorscheme highlights in a custom way',
   callback = function()
     require('core.highlights').setup()
   end,
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
+  desc = 'Disable hover capability from Ruff',
   group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -71,10 +73,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       client.server_capabilities.hoverProvider = false
     end
   end,
-  desc = 'LSP: Disable hover capability from Ruff',
 })
 
--- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -84,11 +84,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.api.nvim_create_autocmd('User', {
-  -- desc = 'Close certain windows when opening Telescope',
+  desc = 'Close certain windows when opening Telescope',
   pattern = 'TelescopeFindPre',
   group = augroup 'pre_open_telescope',
-  callback = function(event)
-    local curr_buffer_name = vim.api.nvim_buf_get_name(0)
+  callback = function(_)
     local win_number = vim.api.nvim_get_current_win()
     local is_float = vim.api.nvim_win_get_config(win_number).zindex
     if is_float then
@@ -101,6 +100,7 @@ vim.api.nvim_create_autocmd('ModeChanged', {
   desc = 'Modify the statusline colors when changing modes',
   callback = function()
     local utils = require 'core.utils'
+    local color = utils.get_hlgroup 'lualine_b_normal'
     local mode_color = {
       n = utils.get_hlgroup 'lualine_b_normal',
       i = utils.get_hlgroup 'lualine_b_insert',
@@ -111,14 +111,14 @@ vim.api.nvim_create_autocmd('ModeChanged', {
       R = utils.get_hlgroup 'lualine_b_replace',
     }
     local mode = vim.fn.mode()
-    local color = mode_color[mode]
+    color = mode_color[mode]
     color.bold = true
     vim.api.nvim_set_hl(0, 'GrappleLineContentActive', color)
   end,
 })
 
--- Paint the background of the terminal so there's no padding
 vim.api.nvim_create_autocmd({ 'UIEnter', 'ColorScheme' }, {
+  desc = 'Paint the background of the terminal so there is no padding',
   callback = function()
     local normal = vim.api.nvim_get_hl(0, { name = 'Normal' })
     if not normal.bg then

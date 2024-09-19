@@ -6,6 +6,7 @@ vim.o.guifont = 'ZedMono Nerd Font:h17'
 vim.g.neovide_remember_window_size = true
 vim.g.neovide_transparency = 0.90
 vim.g.neovide_window_blurred = true
+vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
 
 vim.opt.fillchars:append { diff = '╱' } -- makes diffs look better
 
