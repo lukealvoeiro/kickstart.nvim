@@ -168,9 +168,6 @@ return { -- LSP Configuration & Plugins
             disableOrganizeImports = true, -- Using Ruff
             openFilesOnly = false,
             typeCheckingMode = 'off',
-            useLibraryCodeForTypes = true,
-            reportMissingImports = 'warning',
-            reportUnusedFunctionArgument = 'none',
           },
         },
       },

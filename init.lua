@@ -3,6 +3,7 @@ require 'core.keymaps'
 require 'core.autocmds'
 
 -- TODOs:
+-- make pasting faster
 -- better session name management
 -- aliases for nvim to n
 -- border for lazy and for mason

@@ -122,7 +122,3 @@ vim.keymap.set('n', '<M-P>', 'o<Esc>P', { desc = 'Paste on new line above' })
 vim.keymap.set('n', '<leader>E', function()
   require('core.commands').yank_diagnostic_error()
 end, { noremap = true, silent = true, desc = 'Copy error' })
-
-vim.keymap.set('n', '<leader>gg', function()
-  require('core.commands').open_git_status()
-end, { desc = 'Open git status' })

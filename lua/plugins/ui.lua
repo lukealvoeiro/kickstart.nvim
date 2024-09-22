@@ -78,4 +78,5 @@ return {
       'MunifTanjim/nui.nvim',
     },
   },
+  { 'akinsho/toggleterm.nvim', version = '*', config = true },
 }

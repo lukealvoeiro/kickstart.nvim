@@ -6,7 +6,7 @@ vim.o.guifont = 'ZedMono Nerd Font:h17'
 vim.g.neovide_remember_window_size = true
 vim.g.neovide_transparency = 0.90
 vim.g.neovide_window_blurred = true
-vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
+vim.g.neovide_input_macos_option_key_is_meta = 'both'
 
 vim.opt.fillchars:append { diff = '╱' } -- makes diffs look better
 
@@ -58,6 +58,13 @@ vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
+vim.opt.statuscolumn = [[%!v:lua.require('core.ui').statuscolumn()]]
+
+vim.opt.foldlevel = 99
+vim.opt.smoothscroll = true
+vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
+vim.opt.foldmethod = 'expr'
+vim.opt.foldtext = ''
 
 -- Decrease update time
 vim.opt.updatetime = 250

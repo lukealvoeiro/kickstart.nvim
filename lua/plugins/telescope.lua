@@ -1,7 +1,6 @@
 return { -- Fuzzy Finder (files, lsp, etc)
-  'nvim-telescope/telescope.nvim',
+  'lukealvoeiro/telescope.nvim',
   event = 'VimEnter',
-  branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
     { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -56,6 +55,21 @@ return { -- Fuzzy Finder (files, lsp, etc)
       return builtin.find_files { hidden = true, no_ignore = true, prompt_title = 'Find All Files' }
     end
 
+    local git_status_search = function()
+      return builtin.git_status {
+        col_width = 1,
+        git_icons = {
+          added = 'A',
+          changed = 'M',
+          deleted = 'D',
+          copied = 'M',
+          renamed = 'R',
+          unmerged = 'U',
+          untracked = 'A',
+        },
+      }
+    end
+
     local find_projects = function(directory)
       directory = '~/Development' or directory
       require('telescope.builtin').find_files {
@@ -101,6 +115,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader>sp', find_projects, { desc = '[S]earch [P]rojects' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    vim.keymap.set('n', '<leader>sv', git_status_search, { desc = '[S]earch [V]CS' })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()

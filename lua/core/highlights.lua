@@ -20,6 +20,9 @@ M.setup = function()
   local win_separator = utils.get_hlgroup 'WinSeparator'
   win_separator.bg = 'NONE'
   vim.api.nvim_set_hl(0, 'WinSeparator', win_separator)
+
+  vim.api.nvim_set_hl(0, 'TelescopeResultsStaged', { link = 'Added' })
+  vim.api.nvim_set_hl(0, 'TelescopeResultsUnstaged', { link = 'Removed' })
 end
 
 return M
