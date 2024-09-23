@@ -25,6 +25,7 @@ vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 
 vim.opt.guicursor = ''
 vim.opt.swapfile = false
+vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
