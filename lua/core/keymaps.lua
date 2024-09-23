@@ -119,6 +119,10 @@ vim.keymap.set('n', '<S-CR>', '@="m`o<C-V><Esc>``"<CR>', { desc = '[Enter] a new
 vim.keymap.set('n', '<M-p>', 'o<Esc>p', { desc = 'Paste on new line below' })
 vim.keymap.set('n', '<M-P>', 'o<Esc>P', { desc = 'Paste on new line above' })
 
+-- Marks
+vim.keymap.set('n', '`d', ':delm.', { desc = 'Delete mark' })
+
+-- Yank diagnostic messages
 vim.keymap.set('n', '<leader>E', function()
   require('core.commands').yank_diagnostic_error()
 end, { noremap = true, silent = true, desc = 'Copy error' })
