@@ -128,6 +128,9 @@ return {
             hl_group = 'CmpGhostText',
           },
         },
+        preview = {
+          border = 'rounded',
+        },
         ---@diagnostic disable-next-line: missing-fields
         formatting = {
           format = function(_, vim_item)

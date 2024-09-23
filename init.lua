@@ -7,15 +7,11 @@ require 'core.autocmds'
 -- better session name management
 -- aliases for nvim to n
 -- border for lazy and for mason
--- figure out dap for python
--- ghost text be kinda wierd (maybe it only shows up if your completion has same starting chars)
 -- preview parameters for a function as you open the brakets
 -- check out what else is available in noice
 -- fix trouble highlight groups
 -- add trouble as source of diagnostics
--- learn how to use 'g'
 -- trouble diagnostics in lualine
--- start using grapple or harpoon by seeing how much time you've spent in a buffer recently and if its over a certain amount and not in harpoon list, ask u to change
 -- thing like lazy vim does that asks you whether you wanna close unsaved buffer before closing it with q
 -- figure out ``` usage
 

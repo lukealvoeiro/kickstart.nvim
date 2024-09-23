@@ -6,7 +6,6 @@ return {
     config = function()
       local colors = require 'ayu.colors'
       colors.generate(false)
-      colors.selection_inactive = '#38485d'
       require('ayu').setup {
         terminal = true,
         mirage = true,

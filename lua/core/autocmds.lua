@@ -109,6 +109,7 @@ vim.api.nvim_create_autocmd('ModeChanged', {
       V = utils.get_hlgroup 'lualine_b_visual',
       c = utils.get_hlgroup 'lualine_b_command',
       R = utils.get_hlgroup 'lualine_b_replace',
+      t = utils.get_hlgroup 'lualine_b_normal',
     }
     local mode = vim.fn.mode()
     color = mode_color[mode]
