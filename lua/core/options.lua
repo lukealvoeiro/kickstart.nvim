@@ -6,12 +6,13 @@ vim.o.guifont = 'ZedMono Nerd Font:h17'
 vim.g.neovide_remember_window_size = true
 vim.g.neovide_transparency = 0.90
 vim.g.neovide_window_blurred = true
+vim.opt.linespace = -1
 vim.g.neovide_input_macos_option_key_is_meta = 'both'
 
 vim.opt.fillchars:append { diff = '╱' } -- makes diffs look better
 
 vim.opt.termguicolors = true
-vim.opt.pumblend = 0
+vim.opt.pumblend = 15
 vim.opt.wrap = true
 vim.opt.breakindent = true
 vim.opt.showbreak = string.rep(' ', 3) -- Make it so that long lines wrap smartly
@@ -96,7 +97,7 @@ vim.opt.pumheight = 10
 vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.opt.cursorline = false
+vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
