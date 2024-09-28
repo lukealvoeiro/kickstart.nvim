@@ -118,9 +118,11 @@ return {
         window = {
           completion = cmp.config.window.bordered {
             winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+            col_offset = -1,
           },
           documentation = cmp.config.window.bordered {
             winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+            col_offset = -1,
           },
         },
         experimental = {
