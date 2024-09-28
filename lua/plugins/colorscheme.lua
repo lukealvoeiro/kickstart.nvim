@@ -11,13 +11,19 @@ return {
         mirage = true,
         overrides = function()
           local selection_color = '#38485d'
+          local line_colors = '#54565d'
+          local current_line_bg = '#313540'
           return require('core.utils').table_merge({
             LineNr = { fg = colors.special, bold = true },
-            LineNrAbove = { fg = colors.comment },
-            LineNrBelow = { fg = colors.comment },
+            LineNrAbove = { fg = line_colors },
+            LineNrBelow = { fg = line_colors },
+            WinSeparator = { fg = line_colors },
             Visual = { bg = selection_color },
+            CursorLine = { bg = current_line_bg },
+            CursorLineNr = { fg = colors.special, bold = true },
             IncSearch = { fg = colors.keyword, bg = selection_color },
-            -- NormalFloat = { bg = '#353944' },
+            Pmenu = { blend = vim.o.pumblend, bg = '#1c212b' },
+            PmenuSel = { blend = 0, bg = selection_color },
           }, vim.g.transparency_enabled and {
             Normal = { bg = 'None' },
             ColorColumn = { bg = 'None' },
